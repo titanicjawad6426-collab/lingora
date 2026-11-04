@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#24116b">
+
+<title>LINGORA - تعلم اللغات بذكاء</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(145deg,#180b50,#27208b,#087de8);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.logo {
+    width: 135px;
+    height: 135px;
+    margin: 0 auto 20px;
+    border-radius: 35px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 35px #0004;
+}
+
+.logo svg {
+    width: 110px;
+    height: 110px;
+}
+
+h1 {
+    font-size: 43px;
+    letter-spacing: 5px;
+    margin-bottom: 8px;
+    font-weight: 900;
+}
+
+.slogan {
+    font-size: 17px;
+    letter-spacing: 2px;
+    color: #b8d9ff;
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-size: 27px;
+    margin-bottom: 15px;
+}
+
+.description {
+    font-size: 17px;
+    line-height: 2;
+    color: #e3e7ff;
+    margin-bottom: 35px;
+}
+
+.start-btn {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+    padding: 17px;
+    border: none;
+    border-radius: 18px;
+    background: linear-gradient(90deg,#a32bdf,#2879ff);
+    color: white;
+    font-size: 19px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 8px 25px #0004;
+    transition: .3s;
+}
+
+.start-btn:active {
+    transform: scale(.96);
+}
+
+.footer {
+    margin-top: 45px;
+    color: #c5d7ff;
+    font-size: 13px;
+}
+
+.decoration {
+    position: fixed;
+    border-radius: 50%;
+    background: #ffffff0b;
+    z-index: 1;
+}
+
+.circle1 {
+    width: 250px;
+    height: 250px;
+    top: -80px;
+    right: -80px;
+}
+
+.circle2 {
+    width: 300px;
+    height: 300px;
+    bottom: -120px;
+    left: -100px;
+}
+
+@media(max-width:400px) {
+    h1 {
+        font-size: 35px;
+    }
+
+    h2 {
+        font-size: 23px;
+    }
+
+    .description {
+        font-size: 15px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="decoration circle1"></div>
+<div class="decoration circle2"></div>
+
+<main class="container">
+
+    <div class="logo">
+
+        <!-- شعار LINGORA -->
+
+        <svg viewBox="0 0 120 120">
+
+            <defs>
+                <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#078cff"/>
+                    <stop offset="55%" stop-color="#4025d8"/>
+                    <stop offset="100%" stop-color="#b31bdb"/>
+                </linearGradient>
+            </defs>
+
+            <path d="M60 8
+                     A48 48 0 0 0 20 82
+                     L12 105
+                     L42 94
+                     A48 48 0 1 0 60 8Z"
+                  fill="url(#grad)"/>
+
+            <path d="M36 25
+                     Q58 10 82 27
+                     M24 43 Q53 27 93 42
+                     M21 61 Q55 48 96 57"
+                  fill="none"
+                  stroke="white"
+                  stroke-width="3"
+                  stroke-linecap="round"/>
+
+            <path d="M48 32 L48 83 Q48 91 59 91
+                     L82 91"
+                  fill="none"
+                  stroke="white"
+                  stroke-width="7"
+                  stroke-linecap="round"/>
+
+            <circle cx="78" cy="67" r="3" fill="white"/>
+            <circle cx="88" cy="67" r="3" fill="white"/>
+
+            <path d="M95 8 L98 16 L106 19 L98 22 L95 30 L92 22 L84 19 L92 16Z"
+                  fill="#8d43ff"/>
+
+        </svg>
+
+    </div>
+
+    <h1>LINGORA</h1>
+
+    <div class="slogan">
+        Learn. Speak. Explore.
+    </div>
+
+    <h2>🌍 مرحباً بك في LINGORA</h2>
+
+    <p class="description">
+        اكتشف عالماً جديداً من اللغات.
+        <br>
+        تعلم، تحدث، وتواصل مع العالم.
+        <br>
+        اجعل الذكاء الاصطناعي معلّمك الشخصي!
+    </p>
+
+    <a href="language.html" class="start-btn">
+        ابدأ رحلتك 🚀
+    </a>
+
+    <div class="footer">
+        LINGORA © 2026
+        <br><br>
+        تعلم بذكاء، وتحدث بثقة.
+    </div>
+
+</main>
+
+</body>
+</html>
