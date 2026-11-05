@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINGORA - تعلم المحادثة</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f4ff;
+    color:#292344;
+}
+
+header{
+    background:linear-gradient(135deg,#7046d8,#3985e8);
+    color:white;
+    padding:22px 15px;
+    text-align:center;
+    border-radius:0 0 24px 24px;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+}
+
+header p{margin-bottom:0}
+
+.container{
+    max-width:650px;
+    margin:20px auto;
+    padding:15px;
+}
+
+.welcome,.lesson-card,.result-card{
+    background:white;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 4px 15px #0000000b;
+    margin-bottom:18px;
+}
+
+.welcome{text-align:center}
+
+.welcome h2{color:#7046d8}
+
+.progress-box{
+    height:9px;
+    background:#e8e2f8;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:15px;
+}
+
+.progress{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#7046d8,#3985e8);
+    transition:.3s;
+}
+
+.unit-title{
+    text-align:center;
+    color:#7046d8;
+    margin:25px 0 15px;
+}
+
+.dialogue{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.avatar{
+    width:43px;
+    height:43px;
+    border-radius:50%;
+    background:#eee8ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:23px;
+    flex-shrink:0;
+}
+
+.bubble{
+    background:#f0edff;
+    border-radius:14px;
+    padding:13px;
+    flex:1;
+    min-width:0;
+}
+
+.bubble small{
+    display:block;
+    color:#8065c4;
+    margin-bottom:8px;
+}
+
+.bubble strong{
+    font-size:19px;
+    direction:auto;
+    display:block;
+    line-height:1.6;
+}
+
+.translation{
+    border:1px solid #ded9ed;
+    background:#faf9ff;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:15px;
+    text-align:right;
+}
+
+.translation small{
+    color:#888;
+    display:block;
+    margin-bottom:7px;
+}
+
+.translation div{
+    font-size:16px;
+    line-height:1.6;
+}
+
+.speaker{
+    text-align:center;
+    color:#7046d8;
+    font-size:13px;
+    margin-bottom:12px;
+}
+
+button{
+    border:0;
+    border-radius:11px;
+    padding:12px 16px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+.listen{
+    background:#e9e1ff;
+    color:#7046d8;
+}
+
+.mic{
+    background:#e2f4ed;
+    color:#18865c;
+}
+
+.primary{
+    background:linear-gradient(135deg,#7046d8,#3985e8);
+    color:white;
+}
+
+.secondary{
+    background:#eee;
+    color:#444;
+}
+
+.buttons{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    margin-top:15px;
+}
+
+.answer-area{
+    margin-top:22px;
+    padding-top:18px;
+    border-top:1px solid #eee;
+}
+
+.answer-area h3{
+    color:#7046d8;
+    font-size:17px;
+    text-align:center;
+}
+
+.answer-area p{
+    text-align:center;
+    color:#777;
+    font-size:14px;
+    line-height:1.6;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:1px solid #d8d3e8;
+    border-radius:10px;
+    font-size:16px;
+    margin-top:10px;
+    outline:none;
+    direction:auto;
+}
+
+input:focus{
+    border-color:#7046d8;
+}
+
+.feedback{
+    text-align:center;
+    margin-top:13px;
+    line-height:1.7;
+    font-weight:bold;
+    min-height:25px;
+}
+
+.model-answer{
+    display:none;
+    background:#f0faf4;
+    border:1px solid #c9ead7;
+    border-radius:12px;
+    padding:14px;
+    margin-top:15px;
+    line-height:1.8;
+}
+
+.model-answer strong{
+    color:#16834a;
+}
+
+.score-line{
+    display:flex;
+    justify-content:space-between;
+    margin-top:20px;
+    color:#777;
+    font-size:14px;
+}
+
+.result-card{
+    display:none;
+    text-align:center;
+}
+
+.result-card h2{color:#7046d8}
+
+.result-score{
+    font-size:30px;
+    font-weight:bold;
+    color:#7046d8;
+    margin:20px;
+}
+
+footer{
+    text-align:center;
+    color:#999;
+    padding:25px 10px;
+    font-size:13px;
+}
+
+@media(max-width:380px){
+    button{font-size:13px;padding:11px}
+    .bubble strong{font-size:17px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">LINGORA 🌍</div>
+    <p>Learn. Speak. Explore.</p>
+</header>
+
+<div class="container">
+
+    <section class="welcome">
+        <h2 id="welcome">مرحباً بك!</h2>
+        <p>تعلم كيف تتحدث مع الآخرين بثقة.</p>
+
+        <div class="progress-box">
+            <div class="progress" id="progress"></div>
+        </div>
+        <p id="progressText">بداية رحلتك التعليمية</p>
+    </section>
+
+    <h2 class="unit-title">🗣️ الوحدة الأولى: التعارف وتقديم النفس</h2>
+
+    <section class="lesson-card" id="lessonCard">
+
+        <div class="dialogue">
+            <div class="avatar">🤖</div>
+            <div class="bubble">
+                <small id="speakerName">صديقك الجديد يسألك:</small>
+                <strong id="question"></strong>
+            </div>
+        </div>
+
+        <div class="translation">
+            <small>المعنى بلغتك الأصلية</small>
+            <div id="translation"></div>
+        </div>
+
+        <div class="speaker" id="languageLabel"></div>
+
+        <div class="buttons">
+            <button class="listen" id="listenBtn">
+                🔊 استمع إلى السؤال
+            </button>
+        </div>
+
+        <div class="answer-area">
+
+            <h3>🎤 الآن أجب بنفسك!</h3>
+
+            <p>
+                تحدث باستعمال الميكروفون أو اكتب إجابتك باللغة التي تتعلمها.
+            </p>
+
+            <input
+                type="text"
+                id="answer"
+                placeholder="اكتب إجابتك هنا..."
+                autocomplete="off"
+            >
+
+            <div class="buttons">
+                <button class="mic" id="micBtn">
+                    🎙️ تحدث
+                </button>
+
+                <button class="primary" id="checkBtn">
+                    تحقق من الإجابة
+                </button>
+            </div>
+
+            <div class="feedback" id="feedback" aria-live="polite"></div>
+
+            <div class="model-answer" id="modelBox">
+                <strong>الإجابة النموذجية:</strong>
+                <div id="modelText"></div>
+                <button class="listen" id="modelListen">
+                    🔊 استمع إلى الإجابة
+                </button>
+            </div>
+
+            <div class="buttons" id="nextArea" style="display:none">
+                <button class="primary" id="nextBtn">
+                    السؤال التالي ←
+                </button>
+            </div>
+
+        </div>
+
+        <div class="score-line">
+            <span>⭐ النقاط: <b id="score">0</b></span>
+            <span id="stepLabel"></span>
+        </div>
+
+    </section>
+
+    <section class="result-card" id="resultCard">
+        <h2>🎉 أحسنت!</h2>
+        <p>لقد أكملت محادثة التعارف الأولى.</p>
+
+        <div class="result-score" id="finalScore"></div>
+
+        <p id="resultMessage"></p>
+
+        <button class="primary" id="restartBtn">
+            🔄 أعد التدريب
+        </button>
+
+        <button class="secondary" onclick="location.href='levels.html'">
+            العودة إلى المستويات
+        </button>
+    </section>
+
+</div>
+
+<footer>
+    LINGORA © 2026<br>
+    Learn. Speak. Explore.
+</footer>
+
+<script>
+
+// =====================================
+// 1. بيانات المتعلم
+// =====================================
+
+const learner = JSON.parse(
+    localStorage.getItem("lingoraLearner") || "{}"
+);
+
+const learnerName = learner.name || "المتعلم";
+const learnerAge = learner.age || "12";
+const learnerCountry = learner.country || "Morocco";
+const learnerProfession = learner.profession || "student";
+
+const nativeLanguage = learner.nativeLanguage || "العربية";
+const targetLanguage = learner.targetLanguage || "English";
+
+document.getElementById("welcome").textContent =
+    "مرحباً " + learnerName + " 🌟";
+
+
+// =====================================
+// 2. تحديد اللغة المستهدفة
+// =====================================
+
+function getLanguageInfo(language){
+
+    const value = String(language).toLowerCase().trim();
+
+    if(value.includes("arab") || value.includes("عرب")){
+        return {code:"ar-SA",key:"ar",name:"العربية"};
+    }
+
+    if(value.includes("french") || value.includes("français") || value.includes("فرنس")){
+        return {code:"fr-FR",key:"fr",name:"الفرنسية"};
+    }
+
+    if(value.includes("english") || value.includes("انجليز")){
+        return {code:"en-US",key:"en",name:"الإنجليزية"};
+    }
+
+    return {code:"en-US",key:"en",name:language};
+}
+
+const targetInfo = getLanguageInfo(targetLanguage);
+const nativeInfo = getLanguageInfo(nativeLanguage);
+
+document.getElementById("languageLabel").textContent =
+    "اللغة المستهدفة: " + targetLanguage;
+
+
+// =====================================
+// 3. ترجمة الأسئلة
+// =====================================
+
+const translations = {
+
+ar:[
+"ما اسمك؟",
+"من أين أنت؟",
+"كم عمرك؟",
+"ماذا تفعل؟",
+"كيف حالك؟",
+"تشرفت بلقائك!"
+],
+
+fr:[
+"Comment tu t'appelles ?",
+"D'où viens-tu ?",
+"Quel âge as-tu ?",
+"Que fais-tu dans la vie ?",
+"Comment vas-tu ?",
+"Ravi de te rencontrer !"
+],
+
+en:[
+"What is your name?",
+"Where are you from?",
+"How old are you?",
+"What do you do?",
+"How are you?",
+"Nice to meet you!"
+]
+
+};
+
+
+// =====================================
+// 4. بناء الإجابات الشخصية
+// =====================================
+
+function countryForTarget(){
+
+    const country = String(learnerCountry).toLowerCase();
+
+    if(country.includes("maroc") || country.includes("المغرب")){
+        if(targetInfo.key === "fr") return "le Maroc";
+        if(targetInfo.key === "en") return "Morocco";
+    }
+
+    return learnerCountry;
+}
+
+function professionForTarget(){
+
+    const p = String(learnerProfession).toLowerCase();
+
+    if(p.includes("student") || p.includes("طالب") || p.includes("تلميذ")){
+        if(targetInfo.key === "fr") return "élève";
+        if(targetInfo.key === "en") return "a student";
+        return "طالب";
+    }
+
+    if(p.includes("teacher") || p.includes("معلم") || p.includes("أستاذ")){
+        if(targetInfo.key === "fr") return "enseignant";
+        if(targetInfo.key === "en") return "a teacher";
+        return "أستاذ";
+    }
+
+    return learnerProfession;
+}
+
+function buildModelAnswers(){
+
+    const country = countryForTarget();
+    const profession = professionForTarget();
+
+    if(targetInfo.key === "fr"){
+
+        return [
+            "Je m'appelle " + learnerName + ".",
+            "Je viens de " + country + ".",
+            "J'ai " + learnerAge + " ans.",
+            "Je suis " + profession + ".",
+            "Je vais bien, merci.",
+            "Ravi(e) de te rencontrer aussi !"
+        ];
+    }
+
+    if(targetInfo.key === "ar"){
+
+        return [
+            "اسمي " + learnerName + ".",
+            "أنا من " + country + ".",
+            "عمري " + learnerAge + " سنة.",
+            "أنا " + profession + ".",
+            "أنا بخير، شكراً لك.",
+            "وأنا أيضاً تشرفت بلقائك."
+        ];
+    }
+
+    return [
+        "My name is " + learnerName + ".",
+        "I am from " + country + ".",
+        "I am " + learnerAge + " years old.",
+        "I am " + profession + ".",
+        "I am fine, thank you.",
+        "Nice to meet you too!"
+    ];
+}
+
+
+// =====================================
+// 5. الأسئلة
+// =====================================
+
+const questionKeys = [
+    "name",
+    "country",
+    "age",
+    "profession",
+    "feeling",
+    "meeting"
+];
+
+const questions = {
+
+ar:[
+"ما اسمك؟",
+"من أين أنت؟",
+"كم عمرك؟",
+"ماذا تفعل؟",
+"كيف حالك؟",
+"تشرفت بلقائك!"
+],
+
+fr:[
+"Comment tu t'appelles ?",
+"D'où viens-tu ?",
+"Quel âge as-tu ?",
+"Que fais-tu dans la vie ?",
+"Comment vas-tu ?",
+"Ravi de te rencontrer !"
+],
+
+en:[
+"What is your name?",
+"Where are you from?",
+"How old are you?",
+"What do you do?",
+"How are you?",
+"Nice to meet you!"
+]
+
+};
+
+
+// =====================================
+// 6. ترجمة حسب اللغة الأصلية
+// =====================================
+
+function getNativeTranslation(index){
+
+    const list = translations[nativeInfo.key] || translations.ar;
+
+    return list[index];
+}
+
+
+// =====================================
+// 7. حالة الدرس
+// =====================================
+
+const TOTAL = 6;
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+const models = buildModelAnswers();
+
+const savedProgress = JSON.parse(
+    localStorage.getItem("lingoraConversationProgress") || "{}"
+);
+
+
+// =====================================
+// 8. عرض السؤال
+// =====================================
+
+function renderQuestion(){
+
+    answered = false;
+
+    const list = questions[targetInfo.key] || questions.en;
+
+    document.getElementById("question").textContent =
+        list[current];
+
+    document.getElementById("translation").textContent =
+        getNativeTranslation(current);
+
+    document.getElementById("stepLabel").textContent =
+        (current + 1) + " / " + TOTAL;
+
+    document.getElementById("progress").style.width =
+        ((current + 1) / TOTAL * 100) + "%";
+
+    document.getElementById("progressText").textContent =
+        "السؤال " + (current + 1) + " من " + TOTAL;
+
+    document.getElementById("answer").value = "";
+
+    document.getElementById("feedback").textContent = "";
+
+    document.getElementById("modelBox").style.display = "none";
+
+    document.getElementById("nextArea").style.display = "none";
+
+    document.getElementById("speakerName").textContent =
+        "صديقك الجديد يسألك:";
+
+    document.getElementById("answer").focus();
+}
+
+
+// =====================================
+// 9. تشغيل الصوت
+// =====================================
+
+function speak(text){
+
+    if(!("speechSynthesis" in window)){
+        alert("النطق الصوتي غير مدعوم في هذا المتصفح.");
+        return;
+    }
+
+    speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    utterance.lang = targetInfo.code;
+    utterance.rate = 0.85;
+
+    speechSynthesis.speak(utterance);
+}
+
+document.getElementById("listenBtn").onclick = function(){
+
+    const list = questions[targetInfo.key] || questions.en;
+
+    speak(list[current]);
+};
+
+document.getElementById("modelListen").onclick = function(){
+    speak(models[current]);
+};
+
+
+// =====================================
+// 10. تقييم الإجابة
+// =====================================
+
+function normalize(text){
+
+    return String(text)
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .replace(/[.,!?;:'"()]/g," ")
+        .replace(/\s+/g," ")
+        .trim();
+}
+
+function evaluateAnswer(value){
+
+    const answer = normalize(value);
+
+    if(answer.length < 2) return false;
+
+    const key = questionKeys[current];
+
+    if(targetInfo.key === "en"){
+
+        if(key === "name"){
+            return /my name is|i am|i'm/.test(answer);
+        }
+
+        if(key === "country"){
+            return /i am from|i'm from|i come from/.test(answer);
+        }
+
+        if(key === "age"){
+            return /i am \d+|i'm \d+/.test(answer) &&
+                   answer.includes(String(learnerAge));
+        }
+
+        if(key === "profession"){
+            return /i am|i'm|i work/.test(answer);
+        }
+
+        if(key === "feeling"){
+            return /fine|good|great|well|okay/.test(answer);
+        }
+
+        if(key === "meeting"){
+            return /nice to meet you/.test(answer);
+        }
+    }
+
+    if(targetInfo.key === "fr"){
+
+        if(key === "name"){
+            return /je m appelle|je suis/.test(answer);
+        }
+
+        if(key === "country"){
+            return /je viens de|je suis de/.test(answer);
+        }
+
+        if(key === "age"){
+            return /j ai/.test(answer) &&
+                   answer.includes(String(learnerAge));
+        }
+
+        if(key === "profession"){
+            return /je suis|je travaille/.test(answer);
+        }
+
+        if(key === "feeling"){
+            return /bien|tres bien|ca va/.test(answer);
+        }
+
+        if(key === "meeting"){
+            return /ravi|ravie|enchant/.test(answer);
+        }
+    }
+
+    if(targetInfo.key === "ar"){
+
+        if(key === "name"){
+            return /اسمي|انا/.test(answer);
+        }
+
+        if(key === "country"){
+            return /من/.test(answer);
+        }
+
+        if(key === "age"){
+            return answer.includes(String(learnerAge));
+        }
+
+        if(key === "profession"){
+            return /طالب|تلميذ|استاذ|معلم|انا/.test(answer);
+        }
+
+        if(key === "feeling"){
+            return /بخير|جيد|الحمد/.test(answer);
+        }
+
+        if(key === "meeting"){
+            return /تشرفت|سررت/.test(answer);
+        }
+    }
+
+    return false;
+}
+
+
+// =====================================
+// 11. التحقق من الإجابة
+// =====================================
+
+document.getElementById("checkBtn").onclick = function(){
+
+    if(answered) return;
+
+    const value = document.getElementById("answer").value.trim();
+
+    if(!value){
+        document.getElementById("feedback").textContent =
+            "اكتب إجابتك أولاً أو استخدم الميكروفون.";
+        return;
+    }
+
+    const correct = evaluateAnswer(value);
+
+    if(correct){
+
+        score++;
+
+        document.getElementById("feedback").textContent =
+            "🎉 إجابة رائعة! أحسنت.";
+
+        document.getElementById("feedback").style.color =
+            "#16834a";
+
+    }else{
+
+        document.getElementById("feedback").textContent =
+            "👏 حاول مرة أخرى أو استعن بالإجابة النموذجية.";
+
+        document.getElementById("feedback").style.color =
+            "#b45309";
+    }
+
+    document.getElementById("score").textContent = score;
+
+    answered = true;
+
+    document.getElementById("modelText").textContent =
+        models[current];
+
+    document.getElementById("modelBox").style.display = "block";
+
+    document.getElementById("nextArea").style.display = "flex";
+
+    localStorage.setItem(
+        "lingoraConversationProgress",
+        JSON.stringify({
+            completed: current + 1,
+            score: score
+        })
+    );
+};
+
+
+// =====================================
+// 12. الميكروفون
+// =====================================
+
+document.getElementById("micBtn").onclick = function(){
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+    if(!SpeechRecognition){
+
+        document.getElementById("feedback").textContent =
+            "الميكروفون غير مدعوم هنا. يمكنك كتابة الإجابة بدلاً منه.";
+
+        return;
+    }
+
+    const recognition = new SpeechRecognition();
+
+    recognition.lang = targetInfo.code;
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    document.getElementById("feedback").textContent =
+        "🎙️ أستمع إليك الآن...";
+
+    recognition.onresult = function(event){
+
+        const result = event.results[0][0].transcript;
+
+        document.getElementById("answer").value = result;
+
+        document.getElementById("feedback").textContent =
+            "تم التعرف على إجابتك. اضغط على تحقق من الإجابة.";
+    };
+
+    recognition.onerror = function(){
+
+        document.getElementById("feedback").textContent =
+            "لم أتمكن من سماعك. حاول مجدداً أو اكتب إجابتك.";
+    };
+
+    recognition.start();
+};
+
+
+// =====================================
+// 13. السؤال التالي
+// =====================================
+
+document.getElementById("nextBtn").onclick = function(){
+
+    if(current < TOTAL - 1){
+
+        current++;
+
+        renderQuestion();
+
+    }else{
+
+        finishLesson();
+    }
+};
+
+
+// =====================================
+// 14. نهاية الدرس
+// =====================================
+
+function finishLesson(){
+
+    document.getElementById("lessonCard").style.display = "none";
+
+    document.getElementById("resultCard").style.display = "block";
+
+    document.getElementById("progress").style.width = "100%";
+
+    document.getElementById("progressText").textContent =
+        "اكتملت الوحدة الأولى!";
+
+    document.getElementById("finalScore").textContent =
+        score + " / " + TOTAL;
+
+    document.getElementById("resultMessage").textContent =
+        score >= 4
+        ? "ممتاز! أنت تتقدم بشكل رائع في تعلم المحادثة."
+        : "بداية جيدة! أعد التدريب لتطوير مهاراتك.";
+}
+
+
+// =====================================
+// 15. إعادة التدريب
+// =====================================
+
+document.getElementById("restartBtn").onclick = function(){
+
+    current = 0;
+    score = 0;
+
+    document.getElementById("score").textContent = "0";
+
+    document.getElementById("lessonCard").style.display = "block";
+
+    document.getElementById("resultCard").style.display = "none";
+
+    renderQuestion();
+};
+
+
+// =====================================
+// 16. البداية
+// =====================================
+
+renderQuestion();
+
+</script>
+
+</body>
+</html>
