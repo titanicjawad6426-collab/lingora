@@ -25,7 +25,7 @@ body {
 header {
     background: linear-gradient(120deg,#39218a,#6652dc,#2996d8);
     color: white;
-    padding: 25px 20px 40px;
+    padding: 25px 20px 35px;
     border-radius: 0 0 30px 30px;
 }
 
@@ -48,13 +48,32 @@ header {
 }
 
 header h2 {
-    margin-top: 30px;
+    margin-top: 28px;
     font-size: 24px;
 }
 
 header p {
     opacity: .9;
-    line-height: 1.7;
+    line-height: 1.8;
+}
+
+/* START BUTTON */
+
+.start-learning {
+    display: inline-block;
+    background: white;
+    color: #5136b5;
+    text-decoration: none;
+    padding: 13px 25px;
+    border-radius: 14px;
+    font-weight: bold;
+    margin-top: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.12);
+    transition: .2s;
+}
+
+.start-learning:active {
+    transform: scale(.96);
 }
 
 /* MAIN */
@@ -110,7 +129,7 @@ header p {
     font-size: 14px;
     color: #888;
     margin: 8px 0 0;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 /* CARD COLORS */
@@ -142,7 +161,7 @@ header p {
 }
 
 .progress-card p {
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 .progress-bar {
@@ -222,6 +241,8 @@ footer {
 
 <body>
 
+<!-- HEADER -->
+
 <header>
 
     <div class="top">
@@ -239,20 +260,26 @@ footer {
         تعلم، استمع، وتحدث بثقة!
     </p>
 
+    <a href="levels.html" class="start-learning">
+        🚀 ابدأ التعلم
+    </a>
+
 </header>
 
+
+<!-- MAIN -->
 
 <div class="container">
 
     <h2 class="section-title">
-        🎯 ماذا تريد أن تتعلم اليوم؟
+        🎯 أقسام التعلم
     </h2>
 
     <div class="grid">
 
         <!-- LETTERS -->
 
-        <a href="alphabet.html" class="card">
+        <a href="levels.html" class="card">
 
             <div class="icon">🔤</div>
 
@@ -268,7 +295,7 @@ footer {
 
         <!-- VOCABULARY -->
 
-        <a href="vocabulary.html" class="card">
+        <a href="levels.html" class="card">
 
             <div class="icon">📚</div>
 
@@ -282,9 +309,9 @@ footer {
         </a>
 
 
-        <!-- SPEAKING AND CONVERSATION -->
+        <!-- SPEAKING -->
 
-        <a href="conversation.html" class="card">
+        <a href="levels.html" class="card">
 
             <div class="icon">🗣️</div>
 
@@ -340,6 +367,8 @@ footer {
 </div>
 
 
+<!-- FOOTER -->
+
 <footer>
 
     LINGORA © 2026
@@ -353,7 +382,9 @@ footer {
 
 <script>
 
-// GET LEARNER INFORMATION
+// ==========================
+// بيانات المتعلم
+// ==========================
 
 let learner = {};
 
@@ -370,7 +401,9 @@ try {
 }
 
 
-// CHECK LEARNER
+// ==========================
+// التحقق من وجود المتعلم
+// ==========================
 
 if (!learner.name) {
 
@@ -384,7 +417,9 @@ if (!learner.name) {
 }
 
 
-// LEARNING STATISTICS
+// ==========================
+// إحصائيات التعلم
+// ==========================
 
 const lessons = Number(
     localStorage.getItem("lingoraLessons") || 0
@@ -409,7 +444,9 @@ document.getElementById("pointsCount").textContent =
     points;
 
 
-// PROGRESS
+// ==========================
+// حساب نسبة التقدم
+// ==========================
 
 const progress = Math.min(
     100,
