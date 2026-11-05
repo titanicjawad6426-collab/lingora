@@ -63,12 +63,6 @@ header p{margin-bottom:0}
     transition:.3s;
 }
 
-.unit-title{
-    text-align:center;
-    color:#7046d8;
-    margin:25px 0 15px;
-}
-
 .dialogue{
     display:flex;
     align-items:flex-start;
@@ -286,17 +280,17 @@ footer{
         <div class="progress-box">
             <div class="progress" id="progress"></div>
         </div>
+
         <p id="progressText">بداية رحلتك التعليمية</p>
     </section>
-
-    <h2 class="unit-title">🗣️ الوحدة الأولى: التعارف وتقديم النفس</h2>
 
     <section class="lesson-card" id="lessonCard">
 
         <div class="dialogue">
-            <div class="avatar">🤖</div>
+            <div class="avatar">👩</div>
+
             <div class="bubble">
-                <small id="speakerName">صديقك الجديد يسألك:</small>
+                <small id="speakerName">صديقتك الجديدة تسألك:</small>
                 <strong id="question"></strong>
             </div>
         </div>
@@ -310,7 +304,7 @@ footer{
 
         <div class="buttons">
             <button class="listen" id="listenBtn">
-                🔊 استمع إلى السؤال
+                👩 🔊 استمع إلى السؤال
             </button>
         </div>
 
@@ -330,6 +324,7 @@ footer{
             >
 
             <div class="buttons">
+
                 <button class="mic" id="micBtn">
                     🎙️ تحدث
                 </button>
@@ -337,22 +332,29 @@ footer{
                 <button class="primary" id="checkBtn">
                     تحقق من الإجابة
                 </button>
+
             </div>
 
             <div class="feedback" id="feedback" aria-live="polite"></div>
 
             <div class="model-answer" id="modelBox">
-                <strong>الإجابة النموذجية:</strong>
+
+                <strong>👨 الإجابة النموذجية:</strong>
+
                 <div id="modelText"></div>
+
                 <button class="listen" id="modelListen">
-                    🔊 استمع إلى الإجابة
+                    👨 🔊 استمع إلى الإجابة
                 </button>
+
             </div>
 
             <div class="buttons" id="nextArea" style="display:none">
+
                 <button class="primary" id="nextBtn">
                     السؤال التالي ←
                 </button>
+
             </div>
 
         </div>
@@ -365,8 +367,10 @@ footer{
     </section>
 
     <section class="result-card" id="resultCard">
+
         <h2>🎉 أحسنت!</h2>
-        <p>لقد أكملت محادثة التعارف الأولى.</p>
+
+        <p>لقد أكملت تدريب المحادثة.</p>
 
         <div class="result-score" id="finalScore"></div>
 
@@ -379,6 +383,7 @@ footer{
         <button class="secondary" onclick="location.href='levels.html'">
             العودة إلى المستويات
         </button>
+
     </section>
 
 </div>
@@ -485,7 +490,9 @@ function countryForTarget(){
     const country = String(learnerCountry).toLowerCase();
 
     if(country.includes("maroc") || country.includes("المغرب")){
+
         if(targetInfo.key === "fr") return "le Maroc";
+
         if(targetInfo.key === "en") return "Morocco";
     }
 
@@ -497,14 +504,20 @@ function professionForTarget(){
     const p = String(learnerProfession).toLowerCase();
 
     if(p.includes("student") || p.includes("طالب") || p.includes("تلميذ")){
+
         if(targetInfo.key === "fr") return "élève";
+
         if(targetInfo.key === "en") return "a student";
+
         return "طالب";
     }
 
     if(p.includes("teacher") || p.includes("معلم") || p.includes("أستاذ")){
+
         if(targetInfo.key === "fr") return "enseignant";
+
         if(targetInfo.key === "en") return "a teacher";
+
         return "أستاذ";
     }
 
@@ -520,7 +533,7 @@ function buildModelAnswers(){
 
         return [
             "Je m'appelle " + learnerName + ".",
-            "Je viens de " + country + ".",
+            "Je viens du " + country + ".",
             "J'ai " + learnerAge + " ans.",
             "Je suis " + profession + ".",
             "Je vais bien, merci.",
@@ -609,7 +622,7 @@ function getNativeTranslation(index){
 
 
 // =====================================
-// 7. حالة الدرس
+// 7. حالة التدريب
 // =====================================
 
 const TOTAL = 6;
@@ -619,10 +632,6 @@ let score = 0;
 let answered = false;
 
 const models = buildModelAnswers();
-
-const savedProgress = JSON.parse(
-    localStorage.getItem("lingoraConversationProgress") || "{}"
-);
 
 
 // =====================================
@@ -659,17 +668,47 @@ function renderQuestion(){
     document.getElementById("nextArea").style.display = "none";
 
     document.getElementById("speakerName").textContent =
-        "صديقك الجديد يسألك:";
+        "صديقتك الجديدة تسألك:";
 
     document.getElementById("answer").focus();
 }
 
 
 // =====================================
-// 9. تشغيل الصوت
+// 9. نظام الصوتين
 // =====================================
 
-function speak(text){
+// البحث عن صوت مناسب للغة والجنس
+
+function findVoice(gender){
+
+    const voices = speechSynthesis.getVoices();
+
+    const lang = targetInfo.code.split("-")[0];
+
+    const matchingVoices = voices.filter(voice =>
+        voice.lang.toLowerCase().startsWith(lang.toLowerCase())
+    );
+
+    const femaleNames =
+        /female|woman|zira|samantha|victoria|karen|susan|ava|amelie|audrey|marie|paulina|sara|lisa/i;
+
+    const maleNames =
+        /male|man|david|mark|daniel|james|alex|thomas|paul|fred|jorge|john|arthur/i;
+
+    const pattern = gender === "female"
+        ? femaleNames
+        : maleNames;
+
+    return matchingVoices.find(voice =>
+        pattern.test(voice.name)
+    ) || null;
+}
+
+
+// تشغيل الصوت
+
+function speak(text,gender){
 
     if(!("speechSynthesis" in window)){
         alert("النطق الصوتي غير مدعوم في هذا المتصفح.");
@@ -681,21 +720,52 @@ function speak(text){
     const utterance = new SpeechSynthesisUtterance(text);
 
     utterance.lang = targetInfo.code;
+
     utterance.rate = 0.85;
+
+    const voice = findVoice(gender);
+
+    if(voice){
+        utterance.voice = voice;
+    }
+
+    // تغيير النبرة للتمييز بين الصوتين
+
+    utterance.pitch = gender === "female" ? 1.15 : 0.85;
 
     speechSynthesis.speak(utterance);
 }
+
+
+// صوت المرأة: الأسئلة
 
 document.getElementById("listenBtn").onclick = function(){
 
     const list = questions[targetInfo.key] || questions.en;
 
-    speak(list[current]);
+    speak(list[current],"female");
 };
 
+
+// صوت الرجل: الإجابات النموذجية
+
 document.getElementById("modelListen").onclick = function(){
-    speak(models[current]);
+
+    speak(models[current],"male");
 };
+
+
+// تحديث الأصوات عند تحميلها
+
+if("speechSynthesis" in window){
+
+    speechSynthesis.onvoiceschanged = function(){
+
+        speechSynthesis.getVoices();
+
+    };
+
+}
 
 
 // =====================================
@@ -819,8 +889,10 @@ document.getElementById("checkBtn").onclick = function(){
     const value = document.getElementById("answer").value.trim();
 
     if(!value){
+
         document.getElementById("feedback").textContent =
             "اكتب إجابتك أولاً أو استخدم الميكروفون.";
+
         return;
     }
 
@@ -887,7 +959,9 @@ document.getElementById("micBtn").onclick = function(){
     const recognition = new SpeechRecognition();
 
     recognition.lang = targetInfo.code;
+
     recognition.interimResults = false;
+
     recognition.maxAlternatives = 1;
 
     document.getElementById("feedback").textContent =
@@ -933,10 +1007,12 @@ document.getElementById("nextBtn").onclick = function(){
 
 
 // =====================================
-// 14. نهاية الدرس
+// 14. نهاية التدريب
 // =====================================
 
 function finishLesson(){
+
+    speechSynthesis.cancel();
 
     document.getElementById("lessonCard").style.display = "none";
 
@@ -945,7 +1021,7 @@ function finishLesson(){
     document.getElementById("progress").style.width = "100%";
 
     document.getElementById("progressText").textContent =
-        "اكتملت الوحدة الأولى!";
+        "أكملت التدريب بنجاح!";
 
     document.getElementById("finalScore").textContent =
         score + " / " + TOTAL;
@@ -963,7 +1039,10 @@ function finishLesson(){
 
 document.getElementById("restartBtn").onclick = function(){
 
+    speechSynthesis.cancel();
+
     current = 0;
+
     score = 0;
 
     document.getElementById("score").textContent = "0";
