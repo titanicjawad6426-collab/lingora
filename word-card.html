@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINGORA - تعلم الكلمات</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: #f7f6fc;
+    color: #29243b;
+}
+
+.container {
+    max-width: 500px;
+    margin: 30px auto;
+}
+
+h2 {
+    text-align: center;
+    color: #6741c6;
+    margin-bottom: 25px;
+}
+
+/* بطاقة الكلمة */
+.word-card {
+    background: white;
+    border: 1px solid #e8e2f3;
+    border-radius: 14px;
+    padding: 15px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 12px rgba(80, 50, 130, 0.06);
+}
+
+/* الترجمة */
+.translation {
+    width: 100%;
+    border: 1px solid #e4deeb;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: right;
+    direction: rtl;
+    font-size: 16px;
+    color: #393343;
+    margin-bottom: 12px;
+}
+
+/* الكلمة باللغة المستهدفة */
+.target-word {
+    border: 1px solid #e4deeb;
+    border-radius: 5px;
+    padding: 14px 10px;
+    font-size: 23px;
+    text-align: left;
+    direction: ltr;
+    color: #6741c6;
+    margin-bottom: 13px;
+    font-weight: bold;
+}
+
+/* زر الاستماع */
+.audio-button {
+    display: block;
+    margin: auto;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    background: linear-gradient(135deg, #7651d5, #4779dc);
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.audio-button:active {
+    transform: scale(0.96);
+}
+
+.audio-button:disabled {
+    opacity: 0.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>📚 تعلم الكلمات</h2>
+
+    <div class="word-card">
+
+        <!-- الترجمة في الأعلى وأقصى اليمين -->
+        <div class="translation">
+            مرحبا
+        </div>
+
+        <!-- الكلمة باللغة المستهدفة -->
+        <div class="target-word" id="targetWord">
+            Bonjour
+        </div>
+
+        <!-- زر الاستماع -->
+        <button class="audio-button"
+                onclick="speakWord(this)">
+            🔊 استمع إلى النطق
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+// قراءة لغة التعلم من بيانات المتعلم
+const learner = JSON.parse(
+    localStorage.getItem("lingoraLearner") || "{}"
+);
+
+// تحديد اللغة المستهدفة
+const targetLanguage = learner.targetLanguage || "French";
+
+// تحويل اسم اللغة إلى رمز صوتي
+function getLanguageCode(language) {
+
+    const lang = language.toLowerCase();
+
+    if (lang.includes("fr") || lang.includes("فرنس")) {
+        return "fr-FR";
+    }
+
+    if (lang.includes("en") || lang.includes("إنجل")) {
+        return "en-US";
+    }
+
+    if (lang.includes("es") || lang.includes("إسبان")) {
+        return "es-ES";
+    }
+
+    if (lang.includes("de") || lang.includes("ألمان")) {
+        return "de-DE";
+    }
+
+    if (lang.includes("it") || lang.includes("إيطال")) {
+        return "it-IT";
+    }
+
+    return "fr-FR";
+}
+
+// تشغيل النطق عند الضغط
+function speakWord(button) {
+
+    const word = button.parentElement
+        .querySelector(".target-word")
+        .textContent.trim();
+
+    if (!("speechSynthesis" in window)) {
+        alert("عذراً، متصفحك لا يدعم النطق الصوتي.");
+        return;
+    }
+
+    speechSynthesis.cancel();
+
+    const speech = new SpeechSynthesisUtterance(word);
+
+    speech.lang = getLanguageCode(targetLanguage);
+    speech.rate = 0.85;
+    speech.pitch = 1;
+
+    speechSynthesis.speak(speech);
+}
+
+</script>
+
+</body>
+</html>
