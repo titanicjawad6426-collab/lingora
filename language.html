@@ -8,6 +8,7 @@
 <title>LINGORA - إعداد المتعلم</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -54,7 +55,7 @@ h2 {
 .description {
     text-align: center;
     color: #777;
-    line-height: 1.7;
+    line-height: 1.8;
     margin-bottom: 22px;
 }
 
@@ -68,7 +69,7 @@ label {
 
 input, select {
     width: 100%;
-    padding: 14px;
+    padding: 15px;
     border: 2px solid #e0ddf5;
     border-radius: 12px;
     font-size: 16px;
@@ -82,7 +83,7 @@ input:focus, select:focus {
 
 button {
     width: 100%;
-    margin-top: 28px;
+    margin-top: 25px;
     padding: 16px;
     border: none;
     border-radius: 14px;
@@ -97,6 +98,12 @@ button:active {
     transform: scale(.98);
 }
 
+.back-button {
+    background: #eeeafa;
+    color: #5136b5;
+    margin-top: 12px;
+}
+
 .section {
     display: none;
     animation: appear .4s ease;
@@ -104,6 +111,31 @@ button:active {
 
 .section.show {
     display: block;
+}
+
+.progress {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.progress span {
+    width: 35px;
+    height: 7px;
+    border-radius: 10px;
+    background: #e4e0f5;
+}
+
+.progress span.active {
+    background: #6652dc;
+}
+
+.footer {
+    text-align: center;
+    color: #999;
+    font-size: 12px;
+    margin-top: 25px;
 }
 
 @keyframes appear {
@@ -117,15 +149,14 @@ button:active {
     }
 }
 
-.footer {
-    text-align: center;
-    color: #999;
-    font-size: 12px;
-    margin-top: 22px;
-}
+@media(max-width:400px) {
+    .container {
+        padding: 25px 18px;
+    }
 
-.required {
-    color: #e05252;
+    .logo {
+        font-size: 30px;
+    }
 }
 
 </style>
@@ -141,11 +172,20 @@ button:active {
         Learn. Speak. Explore.
     </div>
 
-    <!-- المرحلة الأولى: اختيار اللغة الأصلية -->
+    <div class="progress">
+        <span id="step1" class="active"></span>
+        <span id="step2"></span>
+        <span id="step3"></span>
+    </div>
+
+
+    <!-- المرحلة الأولى -->
 
     <div id="nativeSection" class="section show">
 
-        <h2 id="firstTitle">مرحباً بك!</h2>
+        <h2 id="firstTitle">
+            مرحباً بك في LINGORA!
+        </h2>
 
         <p class="description" id="firstDescription">
             اختر لغتك الأصلية لنقدم لك التطبيق باللغة التي تفهمها.
@@ -156,18 +196,37 @@ button:active {
         </label>
 
         <select id="native">
-            <option value="">-- اختر لغتك --</option>
-            <option value="العربية">العربية</option>
-            <option value="الفرنسية">Français</option>
-            <option value="الإنجليزية">English</option>
-            <option value="الأمازيغية">Tamaziɣt</option>
-            <option value="الإسبانية">Español</option>
+
+            <option value="">
+                -- اختر لغتك --
+            </option>
+
+            <option value="العربية">
+                🇸🇦 العربية
+            </option>
+
+            <option value="الفرنسية">
+                🇫🇷 Français
+            </option>
+
+            <option value="الإنجليزية">
+                🇬🇧 English
+            </option>
+
+            <option value="الإسبانية">
+                🇪🇸 Español
+            </option>
+
         </select>
+
+        <button type="button" onclick="goToTarget()" id="nativeNext">
+            التالي ➜
+        </button>
 
     </div>
 
 
-    <!-- المرحلة الثانية: اختيار لغة التعلم -->
+    <!-- المرحلة الثانية -->
 
     <div id="targetSection" class="section">
 
@@ -178,18 +237,29 @@ button:active {
         <label id="targetLabel"></label>
 
         <select id="target">
+
             <option value="الفرنسية">🇫🇷 الفرنسية</option>
             <option value="الإنجليزية">🇬🇧 الإنجليزية</option>
             <option value="العربية">🇸🇦 العربية</option>
             <option value="الإسبانية">🇪🇸 الإسبانية</option>
             <option value="الألمانية">🇩🇪 الألمانية</option>
             <option value="الإيطالية">🇮🇹 الإيطالية</option>
+
         </select>
+
+        <button type="button" onclick="goToProfile()" id="targetNext">
+            التالي ➜
+        </button>
+
+        <button type="button" class="back-button"
+                onclick="showSection('nativeSection',1)" id="targetBack">
+            ➜ رجوع
+        </button>
 
     </div>
 
 
-    <!-- المرحلة الثالثة: معلومات المتعلم -->
+    <!-- المرحلة الثالثة -->
 
     <div id="profileSection" class="section">
 
@@ -198,17 +268,21 @@ button:active {
         <p class="description" id="profileDescription"></p>
 
         <label id="nameLabel"></label>
+
         <input type="text" id="name">
 
         <label id="ageLabel"></label>
+
         <input type="number" id="age" min="5" max="120">
 
         <label id="professionLabel"></label>
+
         <input type="text" id="profession">
 
         <label id="countryLabel"></label>
 
         <select id="country">
+
             <option value="المغرب">🇲🇦 المغرب</option>
             <option value="فرنسا">🇫🇷 فرنسا</option>
             <option value="الجزائر">🇩🇿 الجزائر</option>
@@ -216,10 +290,16 @@ button:active {
             <option value="مصر">🇪🇬 مصر</option>
             <option value="السعودية">🇸🇦 السعودية</option>
             <option value="بلد آخر">🌍 بلد آخر</option>
+
         </select>
 
-        <button onclick="startLearning()" id="startButton">
+        <button type="button" onclick="startLearning()" id="startButton">
             ابدأ التعلم 🚀
+        </button>
+
+        <button type="button" class="back-button"
+                onclick="showSection('targetSection',2)" id="profileBack">
+            ➜ رجوع
         </button>
 
     </div>
@@ -235,7 +315,7 @@ button:active {
 <script>
 
 // =====================================
-// ترجمات واجهة التطبيق
+// الترجمات
 // =====================================
 
 const translations = {
@@ -251,7 +331,7 @@ const translations = {
 
         targetTitle: "رائع! لنختر لغة جديدة",
         targetDescription: "اختر اللغة التي ترغب في تعلمها.",
-        targetLabel: "🎯 اللغة التي تريد تعلمها",
+        targetLabel: "🎯 اللغة التي تريد تعلمها؟",
 
         profileTitle: "لنبدأ رحلتنا التعليمية!",
         profileDescription: "أخبرنا قليلاً عن نفسك لنخصص تجربة التعلم المناسبة لك.",
@@ -267,6 +347,8 @@ const translations = {
 
         country: "🌍 البلد",
 
+        next: "التالي ➜",
+        back: "➜ رجوع",
         start: "ابدأ التعلم 🚀",
 
         choose: "يرجى اختيار اللغة.",
@@ -304,6 +386,8 @@ const translations = {
 
         country: "🌍 Pays",
 
+        next: "Suivant ➜",
+        back: "➜ Retour",
         start: "Commencer 🚀",
 
         choose: "Veuillez choisir une langue.",
@@ -341,49 +425,14 @@ const translations = {
 
         country: "🌍 Country",
 
+        next: "Next ➜",
+        back: "➜ Back",
         start: "Start learning 🚀",
 
         choose: "Please choose a language.",
         enterName: "Please enter your name.",
         invalidAge: "Please enter a valid age between 5 and 120.",
         sameLanguage: "Please choose a language different from your native language."
-
-    },
-
-
-    "الأمازيغية": {
-
-        dir: "ltr",
-        lang: "zgh",
-
-        welcome: "Azul ɣer LINGORA!",
-        firstDescription: "Fren tutlayt-nnek tamenzut akken ad tesseqdceḍ asnas s tutlayt i tessneḍ.",
-        nativeLabel: "🗣️ Ma d tutlayt-nnek tamenzut?",
-
-        targetTitle: "Igerrez! Fren tutlayt tamaynut",
-        targetDescription: "Fren tutlayt i tebɣiḍ ad tesselmedeḍ.",
-        targetLabel: "🎯 Tutlayt i tebɣiḍ ad tesselmedeḍ",
-
-        profileTitle: "Ad nebdu abrid n uselmed!",
-        profileDescription: "Mudd-aɣ kra n telɣut fell-ak akken ad nerr aselmed yedda d yiman-nnek.",
-
-        name: "👤 Isem ummid",
-        namePlaceholder: "Sekcem isem-nnek",
-
-        age: "🎂 Aẓẓay",
-        agePlaceholder: "Sekcem aẓẓay-nnek",
-
-        profession: "💼 Tawuri (ur ilaq ara)",
-        professionPlaceholder: "Amedya: anelmad, aselmad...",
-
-        country: "🌍 Tamurt",
-
-        start: "Bdu aselmed 🚀",
-
-        choose: "Fren tutlayt.",
-        enterName: "Sekcem isem-nnek.",
-        invalidAge: "Sekcem aẓẓay ameɣtu gar 5 d 120.",
-        sameLanguage: "Fren tutlayt yemgaraden ɣef tutlayt-nnek tamenzut."
 
     },
 
@@ -415,6 +464,8 @@ const translations = {
 
         country: "🌍 País",
 
+        next: "Siguiente ➜",
+        back: "➜ Volver",
         start: "Comenzar a aprender 🚀",
 
         choose: "Por favor, elige un idioma.",
@@ -428,59 +479,25 @@ const translations = {
 
 
 // =====================================
-// ترجمة أسماء البلدان
+// ترجمة البلدان
 // =====================================
 
 const countryTranslations = {
 
     "العربية": [
-        "المغرب",
-        "فرنسا",
-        "الجزائر",
-        "تونس",
-        "مصر",
-        "السعودية",
-        "بلد آخر"
+        "المغرب","فرنسا","الجزائر","تونس","مصر","السعودية","بلد آخر"
     ],
 
     "الفرنسية": [
-        "Maroc",
-        "France",
-        "Algérie",
-        "Tunisie",
-        "Égypte",
-        "Arabie saoudite",
-        "Autre pays"
+        "Maroc","France","Algérie","Tunisie","Égypte","Arabie saoudite","Autre pays"
     ],
 
     "الإنجليزية": [
-        "Morocco",
-        "France",
-        "Algeria",
-        "Tunisia",
-        "Egypt",
-        "Saudi Arabia",
-        "Other country"
-    ],
-
-    "الأمازيغية": [
-        "Lmɣrib",
-        "Fransa",
-        "Dzayer",
-        "Tunes",
-        "Masr",
-        "Saudiyya",
-        "Tamurt-nniḍen"
+        "Morocco","France","Algeria","Tunisia","Egypt","Saudi Arabia","Other country"
     ],
 
     "الإسبانية": [
-        "Marruecos",
-        "Francia",
-        "Argelia",
-        "Túnez",
-        "Egipto",
-        "Arabia Saudita",
-        "Otro país"
+        "Marruecos","Francia","Argelia","Túnez","Egipto","Arabia Saudita","Otro país"
     ]
 
 };
@@ -517,15 +534,6 @@ const languageOptions = {
         "الإسبانية": "🇪🇸 Spanish",
         "الألمانية": "🇩🇪 German",
         "الإيطالية": "🇮🇹 Italian"
-    },
-
-    "الأمازيغية": {
-        "الفرنسية": "🇫🇷 Tafransist",
-        "الإنجليزية": "🇬🇧 Tanglizit",
-        "العربية": "🇸🇦 Taɛrabt",
-        "الإسبانية": "🇪🇸 Tasbanyulit",
-        "الألمانية": "🇩🇪 Talmanit",
-        "الإيطالية": "🇮🇹 Talṭalyanit"
     },
 
     "الإسبانية": {
@@ -583,55 +591,90 @@ function changePageLanguage(language) {
 
     document.getElementById("countryLabel").textContent = t.country;
 
+    document.getElementById("nativeNext").textContent = t.next;
+    document.getElementById("targetNext").textContent = t.next;
+
+    document.getElementById("targetBack").textContent = t.back;
+    document.getElementById("profileBack").textContent = t.back;
+
     document.getElementById("startButton").textContent = t.start;
 
-    // ترجمة أسماء البلدان
+
+    // ترجمة البلدان
 
     const countries = countryTranslations[language];
+
     const countrySelect = document.getElementById("country");
 
-    countrySelect.options[0].text = "🇲🇦 " + countries[0];
-    countrySelect.options[1].text = "🇫🇷 " + countries[1];
-    countrySelect.options[2].text = "🇩🇿 " + countries[2];
-    countrySelect.options[3].text = "🇹🇳 " + countries[3];
-    countrySelect.options[4].text = "🇪🇬 " + countries[4];
-    countrySelect.options[5].text = "🇸🇦 " + countries[5];
-    countrySelect.options[6].text = "🌍 " + countries[6];
+    countries.forEach((country,index) => {
 
-    // ترجمة خيارات لغة التعلم
+        const flags = ["🇲🇦","🇫🇷","🇩🇿","🇹🇳","🇪🇬","🇸🇦","🌍"];
+
+        countrySelect.options[index].text =
+            flags[index] + " " + country;
+
+    });
+
+
+    // ترجمة لغات التعلم
 
     const options = languageOptions[language];
 
     Array.from(targetSelect.options).forEach(option => {
+
         option.textContent = options[option.value];
+
     });
 
 }
 
 
 // =====================================
-// عند اختيار اللغة الأصلية
+// عرض المرحلة المطلوبة
 // =====================================
 
-nativeSelect.addEventListener("change", function() {
+function showSection(sectionId,step) {
+
+    document.querySelectorAll(".section").forEach(section => {
+
+        section.classList.remove("show");
+
+    });
+
+    document.getElementById(sectionId).classList.add("show");
+
+
+    // تحديث مؤشر التقدم
+
+    for(let i=1;i<=3;i++) {
+
+        document.getElementById("step"+i)
+            .classList.toggle("active",i<=step);
+
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+// =====================================
+// اختيار اللغة الأم
+// =====================================
+
+nativeSelect.addEventListener("change",function() {
 
     const selected = this.value;
 
-    if (!selected) {
-        return;
-    }
+    if(!selected) return;
 
     currentNative = selected;
 
     changePageLanguage(selected);
 
-    // إظهار اختيار لغة التعلم
-
-    document.getElementById("targetSection").classList.add("show");
-
-    // إخفاء معلومات المتعلم حتى اختيار لغة التعلم
-
-    document.getElementById("profileSection").classList.remove("show");
 
     // منع اختيار اللغة الأصلية كلغة تعلم
 
@@ -641,35 +684,65 @@ nativeSelect.addEventListener("change", function() {
 
     });
 
-    // اختيار أول لغة متاحة تلقائياً
+
+    // اختيار أول لغة متاحة
 
     const firstAvailable = Array.from(targetSelect.options)
         .find(option => !option.disabled);
 
-    if (firstAvailable) {
+    if(firstAvailable) {
+
         targetSelect.value = firstAvailable.value;
+
     }
 
 });
 
 
 // =====================================
-// عند اختيار لغة التعلم
+// زر التالي من المرحلة الأولى
 // =====================================
 
-targetSelect.addEventListener("change", function() {
+function goToTarget() {
 
-    if (!currentNative) {
+    const selected = nativeSelect.value;
+
+    if(!selected) {
+
+        alert("يرجى اختيار لغتك الأصلية أولاً.");
         return;
+
     }
 
-    if (this.value === currentNative) {
+    currentNative = selected;
+
+    changePageLanguage(selected);
+
+    showSection("targetSection",2);
+
+}
+
+
+// =====================================
+// زر التالي من المرحلة الثانية
+// =====================================
+
+function goToProfile() {
+
+    const target = targetSelect.value;
+
+    const t = translations[currentNative];
+
+    if(!target || target === currentNative) {
+
+        alert(t.sameLanguage);
         return;
+
     }
 
-    document.getElementById("profileSection").classList.add("show");
+    showSection("profileSection",3);
 
-});
+}
 
 
 // =====================================
@@ -688,49 +761,66 @@ function startLearning() {
 
     const country = document.getElementById("country").value;
 
-    const target = document.getElementById("target").value;
+    const target = targetSelect.value;
 
-    if (!name) {
+
+    if(!name) {
+
         alert(t.enterName);
+
         document.getElementById("name").focus();
+
         return;
+
     }
 
-    if (!Number.isInteger(age) || age < 5 || age > 120) {
+
+    if(!Number.isInteger(age) || age < 5 || age > 120) {
+
         alert(t.invalidAge);
+
         document.getElementById("age").focus();
+
         return;
+
     }
 
-    if (!target || target === currentNative) {
+
+    if(!target || target === currentNative) {
+
         alert(t.sameLanguage);
+
         return;
+
     }
+
 
     const learner = {
 
-        name: name,
+        name:name,
 
-        age: age,
+        age:age,
 
-        profession: profession,
+        profession:profession,
 
-        country: country,
+        country:country,
 
-        nativeLanguage: currentNative,
+        nativeLanguage:currentNative,
 
-        targetLanguage: target
+        targetLanguage:target
 
     };
 
-    // الحفاظ على نفس مفتاح التخزين السابق
+
+    // حفظ معلومات المتعلم
 
     localStorage.setItem(
         "lingoraLearner",
         JSON.stringify(learner)
     );
 
-    // الانتقال إلى الصفحة التالية
+
+    // الانتقال إلى لوحة التعلم
 
     window.location.href = "dashboard.html";
 
