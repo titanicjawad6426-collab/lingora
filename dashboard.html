@@ -25,7 +25,7 @@ body {
 header {
     background: linear-gradient(120deg,#39218a,#6652dc,#2996d8);
     color: white;
-    padding: 25px 20px 35px;
+    padding: 25px 20px 40px;
     border-radius: 0 0 30px 30px;
 }
 
@@ -54,102 +54,77 @@ header h2 {
 
 header p {
     opacity: .9;
+    line-height: 1.7;
 }
 
 /* MAIN */
 
 .container {
-    max-width: 900px;
+    max-width: 850px;
     margin: auto;
     padding: 20px;
 }
 
-/* PROFILE CARD */
-
-.profile-card {
-    background: white;
-    border-radius: 20px;
-    padding: 20px;
-    margin-top: -15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,.07);
-}
-
-.profile-title {
-    color: #5136b5;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.profile-info {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 12px;
-}
-
-.info-item {
-    background: #f7f5ff;
-    padding: 12px;
-    border-radius: 12px;
-}
-
-.info-item small {
-    color: #888;
-    display: block;
-    margin-bottom: 6px;
-}
-
-.info-item strong {
-    color: #5136b5;
-    font-size: 15px;
-    overflow-wrap: anywhere;
-}
-
-/* SECTIONS */
+/* SECTION TITLE */
 
 .section-title {
-    margin: 30px 0 15px;
+    margin: 15px 0 20px;
     font-size: 21px;
 }
 
-/* LEARNING GRID */
+/* LEARNING CARDS */
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 15px;
+    grid-template-columns: 1fr;
+    gap: 17px;
 }
 
 .card {
     background: white;
-    border-radius: 18px;
-    padding: 20px 12px;
+    border-radius: 20px;
+    padding: 24px 18px;
     text-align: center;
     text-decoration: none;
     color: #29234b;
-    box-shadow: 0 4px 15px rgba(0,0,0,.05);
+    box-shadow: 0 5px 18px rgba(0,0,0,.06);
     border: 1px solid #eeeafa;
     transition: .2s;
 }
 
 .card:active {
-    transform: scale(.96);
+    transform: scale(.97);
 }
 
 .icon {
-    font-size: 35px;
-    margin-bottom: 10px;
+    font-size: 43px;
+    margin-bottom: 12px;
 }
 
 .card h3 {
-    font-size: 16px;
-    margin: 5px 0;
+    font-size: 19px;
+    margin: 8px 0;
 }
 
 .card p {
-    font-size: 12px;
+    font-size: 14px;
     color: #888;
-    margin: 5px 0;
+    margin: 8px 0 0;
+    line-height: 1.6;
+}
+
+/* CARD COLORS */
+
+.card:nth-child(1) {
+    border-right: 5px solid #6652dc;
+}
+
+.card:nth-child(2) {
+    border-right: 5px solid #2996d8;
+}
+
+.card:nth-child(3) {
+    border-right: 5px solid #8b5cf6;
 }
 
 /* PROGRESS */
@@ -160,6 +135,14 @@ header p {
     padding: 22px;
     border-radius: 20px;
     margin-top: 30px;
+}
+
+.progress-card h3 {
+    margin-top: 0;
+}
+
+.progress-card p {
+    line-height: 1.6;
 }
 
 .progress-bar {
@@ -181,8 +164,9 @@ header p {
 .stats {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
+    margin-top: 22px;
     text-align: center;
+    gap: 10px;
 }
 
 .stats strong {
@@ -192,7 +176,7 @@ header p {
 
 .stats span {
     font-size: 12px;
-    opacity: .85;
+    opacity: .9;
 }
 
 /* FOOTER */
@@ -204,19 +188,7 @@ footer {
     font-size: 13px;
 }
 
-/* MOBILE */
-
-@media(max-width:400px) {
-
-    .profile-info {
-        grid-template-columns: 1fr;
-    }
-
-    header h2 {
-        font-size: 21px;
-    }
-
-}
+/* DESKTOP */
 
 @media(min-width:650px) {
 
@@ -224,10 +196,28 @@ footer {
         grid-template-columns: repeat(3,1fr);
     }
 
+    .card {
+        min-height: 210px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+}
+
+@media(max-width:400px) {
+
+    header h2 {
+        font-size: 21px;
+    }
+
+    .stats strong {
+        font-size: 19px;
+    }
+
 }
 
 </style>
-
 </head>
 
 <body>
@@ -244,59 +234,15 @@ footer {
 
     <h2 id="welcome">مرحباً بك! 👋</h2>
 
-    <p>رحلتك نحو تعلم لغة جديدة تبدأ من هنا.</p>
+    <p>
+        رحلتك نحو تعلم لغة جديدة تبدأ من هنا.
+        تعلم، استمع، وتحدث بثقة!
+    </p>
 
 </header>
 
 
 <div class="container">
-
-    <!-- PERSONAL INFORMATION -->
-
-    <div class="profile-card">
-
-        <div class="profile-title">
-            👤 معلومات المتعلم
-        </div>
-
-        <div class="profile-info">
-
-            <div class="info-item">
-                <small>الاسم</small>
-                <strong id="userName">-</strong>
-            </div>
-
-            <div class="info-item">
-                <small>السن</small>
-                <strong id="userAge">-</strong>
-            </div>
-
-            <div class="info-item" id="professionBox">
-                <small>المهنة</small>
-                <strong id="userProfession">-</strong>
-            </div>
-
-            <div class="info-item">
-                <small>البلد</small>
-                <strong id="userCountry">-</strong>
-            </div>
-
-            <div class="info-item">
-                <small>اللغة الأصلية</small>
-                <strong id="nativeLanguage">-</strong>
-            </div>
-
-            <div class="info-item">
-                <small>لغة التعلم</small>
-                <strong id="targetLanguage">-</strong>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- LEARNING -->
 
     <h2 class="section-title">
         🎯 ماذا تريد أن تتعلم اليوم؟
@@ -304,52 +250,51 @@ footer {
 
     <div class="grid">
 
-        <a href="lessons.html" class="card">
-            <div class="icon">📚</div>
-            <h3>الدروس</h3>
-            <p>تعلم خطوة بخطوة</p>
-        </a>
+        <!-- LETTERS -->
 
         <a href="alphabet.html" class="card">
+
             <div class="icon">🔤</div>
-            <h3>الحروف</h3>
-            <p>اكتشف الأبجدية</p>
+
+            <h3>تعلم نطق الحروف</h3>
+
+            <p>
+                اكتشف حروف اللغة الجديدة
+                وتعلم طريقة نطقها الصحيحة.
+            </p>
+
         </a>
+
+
+        <!-- VOCABULARY -->
 
         <a href="vocabulary.html" class="card">
-            <div class="icon">📝</div>
-            <h3>الكلمات</h3>
-            <p>اكتشف مفردات جديدة</p>
+
+            <div class="icon">📚</div>
+
+            <h3>تعلم الكلمات والتعبيرات</h3>
+
+            <p>
+                تعلم الكلمات والجمل اليومية
+                التي تحتاجها في حياتك.
+            </p>
+
         </a>
 
-        <a href="listening.html" class="card">
-            <div class="icon">🎧</div>
-            <h3>الاستماع والنطق</h3>
-            <p>استمع وتعلم النطق</p>
-        </a>
 
-        <a href="speaking.html" class="card">
-            <div class="icon">🎤</div>
-            <h3>التحدث</h3>
-            <p>تدرب على نطق الكلمات</p>
-        </a>
+        <!-- SPEAKING AND CONVERSATION -->
 
         <a href="conversation.html" class="card">
-            <div class="icon">💬</div>
-            <h3>المحادثة</h3>
-            <p>تعلم التواصل والحوار</p>
-        </a>
 
-        <a href="quizzes.html" class="card">
-            <div class="icon">🧠</div>
-            <h3>الاختبارات</h3>
-            <p>اختبر معلوماتك</p>
-        </a>
+            <div class="icon">🗣️</div>
 
-        <a href="games.html" class="card">
-            <div class="icon">🎮</div>
-            <h3>الألعاب</h3>
-            <p>تعلم بطريقة ممتعة</p>
+            <h3>تعلم التحدث والمحادثة</h3>
+
+            <p>
+                تعلم تقديم نفسك والتحدث
+                والتواصل مع الآخرين.
+            </p>
+
         </a>
 
     </div>
@@ -361,10 +306,14 @@ footer {
 
         <h3>🏆 تقدمك التعليمي</h3>
 
-        <p>استمر في التعلم لتحقيق أهدافك!</p>
+        <p>
+            استمر في التعلم لتحقيق أهدافك!
+        </p>
 
         <div class="progress-bar">
+
             <div class="progress-fill" id="progressFill"></div>
+
         </div>
 
         <div class="stats">
@@ -406,11 +355,22 @@ footer {
 
 // GET LEARNER INFORMATION
 
-const learner = JSON.parse(
-    localStorage.getItem("lingoraLearner") || "{}"
-);
+let learner = {};
 
-// IF NO PROFILE EXISTS
+try {
+
+    learner = JSON.parse(
+        localStorage.getItem("lingoraLearner") || "{}"
+    );
+
+} catch(error) {
+
+    learner = {};
+
+}
+
+
+// CHECK LEARNER
 
 if (!learner.name) {
 
@@ -420,35 +380,6 @@ if (!learner.name) {
 
     document.getElementById("welcome").textContent =
         "مرحباً بك، " + learner.name + "! 👋";
-
-    document.getElementById("userName").textContent =
-        learner.name;
-
-    document.getElementById("userAge").textContent =
-        learner.age + " سنة";
-
-    document.getElementById("userCountry").textContent =
-        learner.country || "-";
-
-    document.getElementById("nativeLanguage").textContent =
-        learner.nativeLanguage || "-";
-
-    document.getElementById("targetLanguage").textContent =
-        learner.targetLanguage || "-";
-
-    // OPTIONAL PROFESSION
-
-    if (learner.profession && learner.profession.trim()) {
-
-        document.getElementById("userProfession").textContent =
-            learner.profession;
-
-    } else {
-
-        document.getElementById("professionBox").style.display =
-            "none";
-
-    }
 
 }
 
@@ -466,6 +397,7 @@ const words = Number(
 const points = Number(
     localStorage.getItem("lingoraPoints") || 0
 );
+
 
 document.getElementById("lessonsCount").textContent =
     lessons;
