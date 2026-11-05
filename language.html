@@ -8,7 +8,6 @@
 <title>LINGORA - إعداد المتعلم</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -53,13 +52,13 @@ h2 {
 
 label {
     display: block;
-    margin-top: 18px;
+    margin-top: 16px;
     margin-bottom: 8px;
     font-weight: bold;
     color: #444;
 }
 
-select {
+input, select {
     width: 100%;
     padding: 14px;
     border: 2px solid #e0ddf5;
@@ -69,7 +68,7 @@ select {
     outline: none;
 }
 
-select:focus {
+input:focus, select:focus {
     border-color: #6652dc;
 }
 
@@ -86,17 +85,12 @@ button {
     cursor: pointer;
 }
 
-button:active {
-    transform: scale(.98);
-}
-
 .footer {
     text-align: center;
     color: #999;
     font-size: 12px;
     margin-top: 22px;
 }
-
 </style>
 </head>
 
@@ -116,8 +110,20 @@ button:active {
         أخبرنا قليلاً عن نفسك لنخصص تجربة التعلم المناسبة لك.
     </p>
 
-    <label>🌍 البلد</label>
+    <label>👤 الاسم الكامل</label>
+    <input type="text" id="name"
+           placeholder="أدخل اسمك">
 
+    <label>🎂 السن</label>
+    <input type="number" id="age"
+           placeholder="أدخل عمرك"
+           min="5" max="120">
+
+    <label>💼 المهنة (اختياري)</label>
+    <input type="text" id="profession"
+           placeholder="مثلاً: تلميذ، طالب، أستاذ...">
+
+    <label>🌍 البلد</label>
     <select id="country">
         <option value="المغرب">🇲🇦 المغرب</option>
         <option value="فرنسا">🇫🇷 فرنسا</option>
@@ -129,7 +135,6 @@ button:active {
     </select>
 
     <label>🗣️ لغتك الأصلية</label>
-
     <select id="native">
         <option value="العربية">العربية</option>
         <option value="الفرنسية">الفرنسية</option>
@@ -139,21 +144,13 @@ button:active {
     </select>
 
     <label>🎯 اللغة التي تريد تعلمها</label>
-
     <select id="target">
-
         <option value="الفرنسية">🇫🇷 الفرنسية</option>
-
         <option value="الإنجليزية">🇬🇧 الإنجليزية</option>
-
         <option value="العربية">🇸🇦 العربية</option>
-
         <option value="الإسبانية">🇪🇸 الإسبانية</option>
-
         <option value="الألمانية">🇩🇪 الألمانية</option>
-
         <option value="الإيطالية">🇮🇹 الإيطالية</option>
-
     </select>
 
     <button onclick="startLearning()">
@@ -170,11 +167,27 @@ button:active {
 
 function startLearning() {
 
+    const name = document.getElementById("name").value.trim();
+
+    const age = Number(document.getElementById("age").value);
+
+    const profession = document.getElementById("profession").value.trim();
+
     const country = document.getElementById("country").value;
 
     const native = document.getElementById("native").value;
 
     const target = document.getElementById("target").value;
+
+    if (!name) {
+        alert("يرجى إدخال اسمك.");
+        return;
+    }
+
+    if (!Number.isInteger(age) || age < 5 || age > 120) {
+        alert("يرجى إدخال سن صحيح بين 5 و120 سنة.");
+        return;
+    }
 
     if (native === target) {
         alert("يرجى اختيار لغة مختلفة عن لغتك الأصلية.");
@@ -182,6 +195,9 @@ function startLearning() {
     }
 
     const learner = {
+        name: name,
+        age: age,
+        profession: profession,
         country: country,
         nativeLanguage: native,
         targetLanguage: target
@@ -193,7 +209,6 @@ function startLearning() {
     );
 
     window.location.href = "dashboard.html";
-
 }
 
 </script>
