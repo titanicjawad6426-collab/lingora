@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LINGORA - الصفحة الرئيسية</title>
+<title>LINGORA</title>
 
 <style>
 
@@ -19,8 +19,6 @@ body {
     background: #f5f4fc;
     color: #29234b;
 }
-
-/* HEADER */
 
 header {
     background: linear-gradient(120deg,#39218a,#6652dc,#2996d8);
@@ -58,15 +56,11 @@ header p {
     font-size: 15px;
 }
 
-/* MAIN */
-
 .container {
     max-width: 750px;
     margin: 35px auto;
     padding: 20px;
 }
-
-/* WELCOME CARD */
 
 .welcome-card {
     background: white;
@@ -93,8 +87,6 @@ header p {
     font-size: 14px;
 }
 
-/* START BUTTON */
-
 .start-learning {
     display: inline-block;
     background: linear-gradient(120deg,#5136b5,#2996d8);
@@ -113,8 +105,6 @@ header p {
     transform: scale(.96);
 }
 
-/* FOOTER */
-
 footer {
     text-align: center;
     padding: 30px 15px;
@@ -122,8 +112,6 @@ footer {
     font-size: 13px;
     line-height: 1.8;
 }
-
-/* MOBILE */
 
 @media(max-width:400px) {
 
@@ -152,12 +140,9 @@ footer {
 
     </div>
 
-    <h2 id="welcome">مرحباً بك! 👋</h2>
+    <h2 id="welcome"></h2>
 
-    <p>
-        تعلم لغة جديدة، واكتشف عالماً من التواصل.
-        ابدأ رحلتك وتعلم كيف تتحدث بثقة!
-    </p>
+    <p id="headerDescription"></p>
 
 </header>
 
@@ -168,17 +153,13 @@ footer {
 
         <div class="welcome-icon">🌟</div>
 
-        <h3>رحلتك التعليمية تبدأ هنا</h3>
+        <h3 id="cardTitle"></h3>
 
-        <p>
-            اختر المستوى الذي يناسب معرفتك الحالية،
-            وتعلم بالطريقة التي تناسبك.
-            يمكنك تجاوز المراحل التي تعرفها مسبقاً
-            والانتقال مباشرة إلى المحادثة.
-        </p>
+        <p id="cardDescription"></p>
 
-        <a href="levels.html" class="start-learning">
-            🚀 ابدأ التعلم
+        <a href="levels.html"
+           class="start-learning"
+           id="startButton">
         </a>
 
     </div>
@@ -199,7 +180,9 @@ footer {
 
 <script>
 
+// =====================================
 // قراءة بيانات المتعلم
+// =====================================
 
 let learner = {};
 
@@ -216,16 +199,155 @@ try {
 }
 
 
-// التحقق من وجود المتعلم
+// =====================================
+// التحقق من البيانات
+// =====================================
 
-if (!learner.name) {
+if (!learner.name || !learner.nativeLanguage) {
 
     window.location.href = "language.html";
 
 } else {
 
-    document.getElementById("welcome").textContent =
-        "مرحباً بك، " + learner.name + "! 👋";
+
+// =====================================
+// ترجمات لوحة التحكم
+// =====================================
+
+const translations = {
+
+    "العربية": {
+
+        lang: "ar",
+        dir: "rtl",
+        title: "LINGORA - الصفحة الرئيسية",
+
+        welcome: "مرحباً بك، {name}! 👋",
+
+        header:
+        "تعلم لغة جديدة، واكتشف عالماً من التواصل. ابدأ رحلتك وتعلم كيف تتحدث بثقة!",
+
+        cardTitle:
+        "رحلتك التعليمية تبدأ هنا",
+
+        cardDescription:
+        "اختر المستوى الذي يناسب معرفتك الحالية، وتعلم بالطريقة التي تناسبك. يمكنك تجاوز المراحل التي تعرفها مسبقاً والانتقال مباشرة إلى المحادثة.",
+
+        start:
+        "🚀 ابدأ التعلم"
+
+    },
+
+
+    "الفرنسية": {
+
+        lang: "fr",
+        dir: "ltr",
+        title: "LINGORA - Accueil",
+
+        welcome: "Bienvenue, {name} ! 👋",
+
+        header:
+        "Apprenez une nouvelle langue et découvrez un monde de communication. Commencez votre parcours et apprenez à parler avec confiance !",
+
+        cardTitle:
+        "Votre parcours d'apprentissage commence ici",
+
+        cardDescription:
+        "Choisissez le niveau qui correspond à vos connaissances. Apprenez à votre rythme. Vous pouvez passer les étapes que vous maîtrisez déjà et accéder directement à la conversation.",
+
+        start:
+        "🚀 Commencer à apprendre"
+
+    },
+
+
+    "الإنجليزية": {
+
+        lang: "en",
+        dir: "ltr",
+        title: "LINGORA - Home",
+
+        welcome: "Welcome, {name}! 👋",
+
+        header:
+        "Learn a new language and discover a world of communication. Start your journey and learn to speak with confidence!",
+
+        cardTitle:
+        "Your learning journey starts here",
+
+        cardDescription:
+        "Choose the level that matches your current knowledge and learn at your own pace. You can skip the stages you already know and go directly to conversation.",
+
+        start:
+        "🚀 Start Learning"
+
+    },
+
+
+    "الإسبانية": {
+
+        lang: "es",
+        dir: "ltr",
+        title: "LINGORA - Inicio",
+
+        welcome: "¡Bienvenido, {name}! 👋",
+
+        header:
+        "Aprende un nuevo idioma y descubre un mundo de comunicación. ¡Comienza tu viaje y aprende a hablar con confianza!",
+
+        cardTitle:
+        "Tu viaje de aprendizaje comienza aquí",
+
+        cardDescription:
+        "Elige el nivel que corresponde a tus conocimientos. Aprende a tu propio ritmo. Puedes saltarte las etapas que ya conoces e ir directamente a la conversación.",
+
+        start:
+        "🚀 Empezar a aprender"
+
+    }
+
+};
+
+
+// =====================================
+// تحديد لغة الواجهة
+// =====================================
+
+const nativeLanguage = learner.nativeLanguage;
+
+const t = translations[nativeLanguage] || translations["العربية"];
+
+
+// =====================================
+// تطبيق اللغة على الصفحة
+// =====================================
+
+document.documentElement.lang = t.lang;
+
+document.documentElement.dir = t.dir;
+
+document.title = t.title;
+
+
+// =====================================
+// عرض المعلومات
+// =====================================
+
+document.getElementById("welcome").textContent =
+    t.welcome.replace("{name}", learner.name);
+
+document.getElementById("headerDescription").textContent =
+    t.header;
+
+document.getElementById("cardTitle").textContent =
+    t.cardTitle;
+
+document.getElementById("cardDescription").textContent =
+    t.cardDescription;
+
+document.getElementById("startButton").textContent =
+    t.start;
 
 }
 
