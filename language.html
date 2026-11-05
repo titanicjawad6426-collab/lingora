@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LINGORA - إعداد المتعلم</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#39218a,#6652dc,#2996d8);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    width: 100%;
+    max-width: 480px;
+    padding: 30px 25px;
+    border-radius: 25px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.2);
+}
+
+.logo {
+    font-size: 34px;
+    font-weight: bold;
+    text-align: center;
+    color: #5136b5;
+}
+
+.slogan {
+    text-align: center;
+    color: #777;
+    margin-bottom: 25px;
+}
+
+h2 {
+    text-align: center;
+    color: #39218a;
+}
+
+label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #444;
+}
+
+select {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #e0ddf5;
+    border-radius: 12px;
+    font-size: 16px;
+    background: #faf9ff;
+    outline: none;
+}
+
+select:focus {
+    border-color: #6652dc;
+}
+
+button {
+    width: 100%;
+    margin-top: 28px;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(90deg,#5136b5,#2996d8);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(.98);
+}
+
+.footer {
+    text-align: center;
+    color: #999;
+    font-size: 12px;
+    margin-top: 22px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">LINGORA 🌍</div>
+
+    <div class="slogan">
+        Learn. Speak. Explore.
+    </div>
+
+    <h2>لنبدأ رحلتنا التعليمية!</h2>
+
+    <p style="text-align:center;color:#777">
+        أخبرنا قليلاً عن نفسك لنخصص تجربة التعلم المناسبة لك.
+    </p>
+
+    <label>🌍 البلد</label>
+
+    <select id="country">
+        <option value="المغرب">🇲🇦 المغرب</option>
+        <option value="فرنسا">🇫🇷 فرنسا</option>
+        <option value="الجزائر">🇩🇿 الجزائر</option>
+        <option value="تونس">🇹🇳 تونس</option>
+        <option value="مصر">🇪🇬 مصر</option>
+        <option value="السعودية">🇸🇦 السعودية</option>
+        <option value="بلد آخر">بلد آخر</option>
+    </select>
+
+    <label>🗣️ لغتك الأصلية</label>
+
+    <select id="native">
+        <option value="العربية">العربية</option>
+        <option value="الفرنسية">الفرنسية</option>
+        <option value="الإنجليزية">الإنجليزية</option>
+        <option value="الأمازيغية">الأمازيغية</option>
+        <option value="الإسبانية">الإسبانية</option>
+    </select>
+
+    <label>🎯 اللغة التي تريد تعلمها</label>
+
+    <select id="target">
+
+        <option value="الفرنسية">🇫🇷 الفرنسية</option>
+
+        <option value="الإنجليزية">🇬🇧 الإنجليزية</option>
+
+        <option value="العربية">🇸🇦 العربية</option>
+
+        <option value="الإسبانية">🇪🇸 الإسبانية</option>
+
+        <option value="الألمانية">🇩🇪 الألمانية</option>
+
+        <option value="الإيطالية">🇮🇹 الإيطالية</option>
+
+    </select>
+
+    <button onclick="startLearning()">
+        ابدأ التعلم 🚀
+    </button>
+
+    <div class="footer">
+        LINGORA © 2026
+    </div>
+
+</div>
+
+<script>
+
+function startLearning() {
+
+    const country = document.getElementById("country").value;
+
+    const native = document.getElementById("native").value;
+
+    const target = document.getElementById("target").value;
+
+    if (native === target) {
+        alert("يرجى اختيار لغة مختلفة عن لغتك الأصلية.");
+        return;
+    }
+
+    const learner = {
+        country: country,
+        nativeLanguage: native,
+        targetLanguage: target
+    };
+
+    localStorage.setItem(
+        "lingoraLearner",
+        JSON.stringify(learner)
+    );
+
+    window.location.href = "dashboard.html";
+
+}
+
+</script>
+
+</body>
+</html>
