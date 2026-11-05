@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LINGORA - لوحة التعلم</title>
+<title>LINGORA - الصفحة الرئيسية</title>
 
 <style>
 
@@ -25,7 +25,7 @@ body {
 header {
     background: linear-gradient(120deg,#39218a,#6652dc,#2996d8);
     color: white;
-    padding: 25px 20px 35px;
+    padding: 25px 20px 50px;
     border-radius: 0 0 30px 30px;
 }
 
@@ -48,27 +48,64 @@ header {
 }
 
 header h2 {
-    margin-top: 28px;
-    font-size: 24px;
+    margin-top: 40px;
+    font-size: 25px;
 }
 
 header p {
-    opacity: .9;
-    line-height: 1.8;
+    opacity: .95;
+    line-height: 1.9;
+    font-size: 15px;
+}
+
+/* MAIN */
+
+.container {
+    max-width: 750px;
+    margin: 35px auto;
+    padding: 20px;
+}
+
+/* WELCOME CARD */
+
+.welcome-card {
+    background: white;
+    border-radius: 22px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,.06);
+}
+
+.welcome-icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.welcome-card h3 {
+    color: #5136b5;
+    font-size: 21px;
+    margin-bottom: 12px;
+}
+
+.welcome-card p {
+    color: #777;
+    line-height: 1.9;
+    font-size: 14px;
 }
 
 /* START BUTTON */
 
 .start-learning {
     display: inline-block;
-    background: white;
-    color: #5136b5;
+    background: linear-gradient(120deg,#5136b5,#2996d8);
+    color: white;
     text-decoration: none;
-    padding: 13px 25px;
+    padding: 15px 35px;
     border-radius: 14px;
     font-weight: bold;
-    margin-top: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,.12);
+    font-size: 17px;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(81,54,181,.2);
     transition: .2s;
 }
 
@@ -76,162 +113,26 @@ header p {
     transform: scale(.96);
 }
 
-/* MAIN */
-
-.container {
-    max-width: 850px;
-    margin: auto;
-    padding: 20px;
-}
-
-/* SECTION TITLE */
-
-.section-title {
-    margin: 15px 0 20px;
-    font-size: 21px;
-}
-
-/* LEARNING CARDS */
-
-.grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 17px;
-}
-
-.card {
-    background: white;
-    border-radius: 20px;
-    padding: 24px 18px;
-    text-align: center;
-    text-decoration: none;
-    color: #29234b;
-    box-shadow: 0 5px 18px rgba(0,0,0,.06);
-    border: 1px solid #eeeafa;
-    transition: .2s;
-}
-
-.card:active {
-    transform: scale(.97);
-}
-
-.icon {
-    font-size: 43px;
-    margin-bottom: 12px;
-}
-
-.card h3 {
-    font-size: 19px;
-    margin: 8px 0;
-}
-
-.card p {
-    font-size: 14px;
-    color: #888;
-    margin: 8px 0 0;
-    line-height: 1.7;
-}
-
-/* CARD COLORS */
-
-.card:nth-child(1) {
-    border-right: 5px solid #6652dc;
-}
-
-.card:nth-child(2) {
-    border-right: 5px solid #2996d8;
-}
-
-.card:nth-child(3) {
-    border-right: 5px solid #8b5cf6;
-}
-
-/* PROGRESS */
-
-.progress-card {
-    background: linear-gradient(120deg,#5136b5,#2996d8);
-    color: white;
-    padding: 22px;
-    border-radius: 20px;
-    margin-top: 30px;
-}
-
-.progress-card h3 {
-    margin-top: 0;
-}
-
-.progress-card p {
-    line-height: 1.7;
-}
-
-.progress-bar {
-    background: rgba(255,255,255,.3);
-    height: 12px;
-    border-radius: 20px;
-    overflow: hidden;
-    margin-top: 15px;
-}
-
-.progress-fill {
-    background: white;
-    width: 0%;
-    height: 100%;
-    border-radius: 20px;
-    transition: .5s;
-}
-
-.stats {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 22px;
-    text-align: center;
-    gap: 10px;
-}
-
-.stats strong {
-    display: block;
-    font-size: 23px;
-}
-
-.stats span {
-    font-size: 12px;
-    opacity: .9;
-}
-
 /* FOOTER */
 
 footer {
     text-align: center;
-    padding: 30px;
+    padding: 30px 15px;
     color: #999;
     font-size: 13px;
+    line-height: 1.8;
 }
 
-/* DESKTOP */
-
-@media(min-width:650px) {
-
-    .grid {
-        grid-template-columns: repeat(3,1fr);
-    }
-
-    .card {
-        min-height: 210px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-}
+/* MOBILE */
 
 @media(max-width:400px) {
 
     header h2 {
-        font-size: 21px;
+        font-size: 22px;
     }
 
-    .stats strong {
-        font-size: 19px;
+    .welcome-card {
+        padding: 25px 15px;
     }
 
 }
@@ -240,8 +141,6 @@ footer {
 </head>
 
 <body>
-
-<!-- HEADER -->
 
 <header>
 
@@ -256,124 +155,42 @@ footer {
     <h2 id="welcome">مرحباً بك! 👋</h2>
 
     <p>
-        رحلتك نحو تعلم لغة جديدة تبدأ من هنا.
-        تعلم، استمع، وتحدث بثقة!
+        تعلم لغة جديدة، واكتشف عالماً من التواصل.
+        ابدأ رحلتك وتعلم كيف تتحدث بثقة!
     </p>
-
-    <a href="levels.html" class="start-learning">
-        🚀 ابدأ التعلم
-    </a>
 
 </header>
 
 
-<!-- MAIN -->
+<main class="container">
 
-<div class="container">
+    <div class="welcome-card">
 
-    <h2 class="section-title">
-        🎯 أقسام التعلم
-    </h2>
+        <div class="welcome-icon">🌟</div>
 
-    <div class="grid">
-
-        <!-- LETTERS -->
-
-        <a href="levels.html" class="card">
-
-            <div class="icon">🔤</div>
-
-            <h3>تعلم نطق الحروف</h3>
-
-            <p>
-                اكتشف حروف اللغة الجديدة
-                وتعلم طريقة نطقها الصحيحة.
-            </p>
-
-        </a>
-
-
-        <!-- VOCABULARY -->
-
-        <a href="levels.html" class="card">
-
-            <div class="icon">📚</div>
-
-            <h3>تعلم الكلمات والتعبيرات</h3>
-
-            <p>
-                تعلم الكلمات والجمل اليومية
-                التي تحتاجها في حياتك.
-            </p>
-
-        </a>
-
-
-        <!-- SPEAKING -->
-
-        <a href="levels.html" class="card">
-
-            <div class="icon">🗣️</div>
-
-            <h3>تعلم التحدث والمحادثة</h3>
-
-            <p>
-                تعلم تقديم نفسك والتحدث
-                والتواصل مع الآخرين.
-            </p>
-
-        </a>
-
-    </div>
-
-
-    <!-- PROGRESS -->
-
-    <div class="progress-card">
-
-        <h3>🏆 تقدمك التعليمي</h3>
+        <h3>رحلتك التعليمية تبدأ هنا</h3>
 
         <p>
-            استمر في التعلم لتحقيق أهدافك!
+            اختر المستوى الذي يناسب معرفتك الحالية،
+            وتعلم بالطريقة التي تناسبك.
+            يمكنك تجاوز المراحل التي تعرفها مسبقاً
+            والانتقال مباشرة إلى المحادثة.
         </p>
 
-        <div class="progress-bar">
-
-            <div class="progress-fill" id="progressFill"></div>
-
-        </div>
-
-        <div class="stats">
-
-            <div>
-                <strong id="lessonsCount">0</strong>
-                <span>الدروس المكتملة</span>
-            </div>
-
-            <div>
-                <strong id="wordsCount">0</strong>
-                <span>الكلمات المتعلمة</span>
-            </div>
-
-            <div>
-                <strong id="pointsCount">0</strong>
-                <span>النقاط</span>
-            </div>
-
-        </div>
+        <a href="levels.html" class="start-learning">
+            🚀 ابدأ التعلم
+        </a>
 
     </div>
 
-</div>
+</main>
 
-
-<!-- FOOTER -->
 
 <footer>
 
     LINGORA © 2026
 
-    <br><br>
+    <br>
 
     Learn. Speak. Explore.
 
@@ -382,9 +199,7 @@ footer {
 
 <script>
 
-// ==========================
-// بيانات المتعلم
-// ==========================
+// قراءة بيانات المتعلم
 
 let learner = {};
 
@@ -401,9 +216,7 @@ try {
 }
 
 
-// ==========================
 // التحقق من وجود المتعلم
-// ==========================
 
 if (!learner.name) {
 
@@ -415,46 +228,6 @@ if (!learner.name) {
         "مرحباً بك، " + learner.name + "! 👋";
 
 }
-
-
-// ==========================
-// إحصائيات التعلم
-// ==========================
-
-const lessons = Number(
-    localStorage.getItem("lingoraLessons") || 0
-);
-
-const words = Number(
-    localStorage.getItem("lingoraWords") || 0
-);
-
-const points = Number(
-    localStorage.getItem("lingoraPoints") || 0
-);
-
-
-document.getElementById("lessonsCount").textContent =
-    lessons;
-
-document.getElementById("wordsCount").textContent =
-    words;
-
-document.getElementById("pointsCount").textContent =
-    points;
-
-
-// ==========================
-// حساب نسبة التقدم
-// ==========================
-
-const progress = Math.min(
-    100,
-    Math.round((lessons / 20) * 100)
-);
-
-document.getElementById("progressFill").style.width =
-    progress + "%";
 
 </script>
 
