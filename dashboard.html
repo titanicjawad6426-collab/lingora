@@ -20,6 +20,8 @@ body {
     color: #29234b;
 }
 
+/* HEADER */
+
 header {
     background: linear-gradient(120deg,#39218a,#6652dc,#2996d8);
     color: white;
@@ -40,9 +42,9 @@ header {
 
 .profile {
     background: rgba(255,255,255,.2);
-    padding: 10px;
+    padding: 12px;
     border-radius: 50%;
-    font-size: 23px;
+    font-size: 24px;
 }
 
 header h2 {
@@ -54,34 +56,63 @@ header p {
     opacity: .9;
 }
 
+/* MAIN */
+
 .container {
-    max-width: 850px;
+    max-width: 900px;
     margin: auto;
     padding: 20px;
 }
 
-.language-card {
+/* PROFILE CARD */
+
+.profile-card {
     background: white;
-    border-radius: 18px;
-    padding: 18px;
+    border-radius: 20px;
+    padding: 20px;
     margin-top: -15px;
     box-shadow: 0 5px 20px rgba(0,0,0,.07);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
 }
 
-.language-card strong {
+.profile-title {
     color: #5136b5;
-    font-size: 19px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
+
+.profile-info {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 12px;
+}
+
+.info-item {
+    background: #f7f5ff;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.info-item small {
+    color: #888;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.info-item strong {
+    color: #5136b5;
+    font-size: 15px;
+    overflow-wrap: anywhere;
+}
+
+/* SECTIONS */
 
 .section-title {
     margin: 30px 0 15px;
     font-size: 21px;
 }
+
+/* LEARNING GRID */
 
 .grid {
     display: grid;
@@ -97,8 +128,8 @@ header p {
     text-decoration: none;
     color: #29234b;
     box-shadow: 0 4px 15px rgba(0,0,0,.05);
-    transition: .2s;
     border: 1px solid #eeeafa;
+    transition: .2s;
 }
 
 .card:active {
@@ -121,6 +152,8 @@ header p {
     margin: 5px 0;
 }
 
+/* PROGRESS */
+
 .progress-card {
     background: linear-gradient(120deg,#5136b5,#2996d8);
     color: white;
@@ -138,7 +171,7 @@ header p {
 }
 
 .progress-fill {
-    background: #fff;
+    background: white;
     width: 0%;
     height: 100%;
     border-radius: 20px;
@@ -162,6 +195,8 @@ header p {
     opacity: .85;
 }
 
+/* FOOTER */
+
 footer {
     text-align: center;
     padding: 30px;
@@ -169,13 +204,30 @@ footer {
     font-size: 13px;
 }
 
-@media(min-width:600px) {
+/* MOBILE */
+
+@media(max-width:400px) {
+
+    .profile-info {
+        grid-template-columns: 1fr;
+    }
+
+    header h2 {
+        font-size: 21px;
+    }
+
+}
+
+@media(min-width:650px) {
+
     .grid {
         grid-template-columns: repeat(3,1fr);
     }
+
 }
 
 </style>
+
 </head>
 
 <body>
@@ -199,25 +251,56 @@ footer {
 
 <div class="container">
 
-    <div class="language-card">
+    <!-- PERSONAL INFORMATION -->
 
-        <div>
-            <small>أنت تتعلم الآن</small>
-            <br>
-            <strong id="targetLanguage">🇫🇷 الفرنسية</strong>
+    <div class="profile-card">
+
+        <div class="profile-title">
+            👤 معلومات المتعلم
         </div>
 
-        <div>
-            <small>لغتك الأصلية</small>
-            <br>
-            <strong id="nativeLanguage">العربية</strong>
+        <div class="profile-info">
+
+            <div class="info-item">
+                <small>الاسم</small>
+                <strong id="userName">-</strong>
+            </div>
+
+            <div class="info-item">
+                <small>السن</small>
+                <strong id="userAge">-</strong>
+            </div>
+
+            <div class="info-item" id="professionBox">
+                <small>المهنة</small>
+                <strong id="userProfession">-</strong>
+            </div>
+
+            <div class="info-item">
+                <small>البلد</small>
+                <strong id="userCountry">-</strong>
+            </div>
+
+            <div class="info-item">
+                <small>اللغة الأصلية</small>
+                <strong id="nativeLanguage">-</strong>
+            </div>
+
+            <div class="info-item">
+                <small>لغة التعلم</small>
+                <strong id="targetLanguage">-</strong>
+            </div>
+
         </div>
 
     </div>
 
 
-    <h2 class="section-title">🎯 ماذا تريد أن تتعلم اليوم؟</h2>
+    <!-- LEARNING -->
 
+    <h2 class="section-title">
+        🎯 ماذا تريد أن تتعلم اليوم؟
+    </h2>
 
     <div class="grid">
 
@@ -272,6 +355,8 @@ footer {
     </div>
 
 
+    <!-- PROGRESS -->
+
     <div class="progress-card">
 
         <h3>🏆 تقدمك التعليمي</h3>
@@ -310,7 +395,7 @@ footer {
 
     LINGORA © 2026
 
-    <br>
+    <br><br>
 
     Learn. Speak. Explore.
 
@@ -319,35 +404,85 @@ footer {
 
 <script>
 
+// GET LEARNER INFORMATION
+
 const learner = JSON.parse(
     localStorage.getItem("lingoraLearner") || "{}"
 );
 
-if (learner.targetLanguage) {
+// IF NO PROFILE EXISTS
 
-    document.getElementById("targetLanguage").textContent =
-        learner.targetLanguage;
+if (!learner.name) {
 
-}
+    window.location.href = "language.html";
 
-if (learner.nativeLanguage) {
+} else {
+
+    document.getElementById("welcome").textContent =
+        "مرحباً بك، " + learner.name + "! 👋";
+
+    document.getElementById("userName").textContent =
+        learner.name;
+
+    document.getElementById("userAge").textContent =
+        learner.age + " سنة";
+
+    document.getElementById("userCountry").textContent =
+        learner.country || "-";
 
     document.getElementById("nativeLanguage").textContent =
-        learner.nativeLanguage;
+        learner.nativeLanguage || "-";
+
+    document.getElementById("targetLanguage").textContent =
+        learner.targetLanguage || "-";
+
+    // OPTIONAL PROFESSION
+
+    if (learner.profession && learner.profession.trim()) {
+
+        document.getElementById("userProfession").textContent =
+            learner.profession;
+
+    } else {
+
+        document.getElementById("professionBox").style.display =
+            "none";
+
+    }
 
 }
 
-const lessons = Number(localStorage.getItem("lingoraLessons") || 0);
-const words = Number(localStorage.getItem("lingoraWords") || 0);
-const points = Number(localStorage.getItem("lingoraPoints") || 0);
 
-document.getElementById("lessonsCount").textContent = lessons;
+// LEARNING STATISTICS
 
-document.getElementById("wordsCount").textContent = words;
+const lessons = Number(
+    localStorage.getItem("lingoraLessons") || 0
+);
 
-document.getElementById("pointsCount").textContent = points;
+const words = Number(
+    localStorage.getItem("lingoraWords") || 0
+);
 
-const progress = Math.min(100, Math.round((lessons / 20) * 100));
+const points = Number(
+    localStorage.getItem("lingoraPoints") || 0
+);
+
+document.getElementById("lessonsCount").textContent =
+    lessons;
+
+document.getElementById("wordsCount").textContent =
+    words;
+
+document.getElementById("pointsCount").textContent =
+    points;
+
+
+// PROGRESS
+
+const progress = Math.min(
+    100,
+    Math.round((lessons / 20) * 100)
+);
 
 document.getElementById("progressFill").style.width =
     progress + "%";
