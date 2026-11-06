@@ -1,355 +1,503 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LINGORA</title>
+<title>LINGORA - Dashboard</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
+    min-height: 100vh;
     font-family: Arial, sans-serif;
-    background: #f5f4fc;
-    color: #29234b;
-}
-
-header {
-    background: linear-gradient(120deg,#39218a,#6652dc,#2996d8);
+    background: linear-gradient(135deg, #39218a, #6652dc, #2996d6);
     color: white;
-    padding: 25px 20px 50px;
-    border-radius: 0 0 30px 30px;
-}
-
-.top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 27px;
-    font-weight: bold;
-}
-
-.profile {
-    background: rgba(255,255,255,.2);
-    padding: 12px;
-    border-radius: 50%;
-    font-size: 24px;
-}
-
-header h2 {
-    margin-top: 40px;
-    font-size: 25px;
-}
-
-header p {
-    opacity: .95;
-    line-height: 1.9;
-    font-size: 15px;
 }
 
 .container {
-    max-width: 750px;
-    margin: 35px auto;
-    padding: 20px;
+    width: 100%;
+    max-width: 850px;
+    margin: auto;
+    padding: 25px 18px 40px;
 }
 
-.welcome-card {
-    background: white;
-    border-radius: 22px;
-    padding: 30px 20px;
+.header {
     text-align: center;
-    box-shadow: 0 5px 20px rgba(0,0,0,.06);
+    padding: 15px 0 25px;
 }
 
-.welcome-icon {
-    font-size: 55px;
-    margin-bottom: 15px;
+.logo {
+    font-size: 38px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
 }
 
-.welcome-card h3 {
-    color: #5136b5;
-    font-size: 21px;
-    margin-bottom: 12px;
+.tagline {
+    font-size: 14px;
+    opacity: .85;
 }
 
-.welcome-card p {
-    color: #777;
-    line-height: 1.9;
+.welcome {
+    background: rgba(255,255,255,.14);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.welcome h2 {
+    margin: 0 0 10px;
+    font-size: 24px;
+}
+
+.welcome p {
+    margin: 5px 0;
+    opacity: .9;
+}
+
+.target {
+    display: inline-block;
+    margin-top: 12px;
+    background: rgba(255,255,255,.2);
+    padding: 8px 18px;
+    border-radius: 30px;
     font-size: 14px;
 }
 
-.start-learning {
-    display: inline-block;
-    background: linear-gradient(120deg,#5136b5,#2996d8);
-    color: white;
-    text-decoration: none;
-    padding: 15px 35px;
-    border-radius: 14px;
-    font-weight: bold;
-    font-size: 17px;
-    margin-top: 20px;
-    box-shadow: 0 5px 15px rgba(81,54,181,.2);
-    transition: .2s;
-}
-
-.start-learning:active {
-    transform: scale(.96);
-}
-
-footer {
+.section-title {
     text-align: center;
-    padding: 30px 15px;
-    color: #999;
+    font-size: 21px;
+    margin: 28px 0 18px;
+}
+
+.learning-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.learning-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    border-radius: 18px;
+    text-decoration: none;
+    color: white;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.2);
+    transition: .25s;
+}
+
+.learning-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255,255,255,.25);
+}
+
+.card-icon {
+    min-width: 65px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+    background: rgba(255,255,255,.2);
+    border-radius: 16px;
+}
+
+.card-content h3 {
+    margin: 0 0 8px;
+    font-size: 19px;
+}
+
+.card-content p {
+    margin: 0;
     font-size: 13px;
-    line-height: 1.8;
+    opacity: .85;
+    line-height: 1.6;
 }
 
-@media(max-width:400px) {
-
-    header h2 {
-        font-size: 22px;
-    }
-
-    .welcome-card {
-        padding: 25px 15px;
-    }
-
+.progress-box {
+    margin-top: 28px;
+    padding: 20px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.14);
 }
 
+.progress-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    gap: 10px;
+}
+
+.stat-number {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.stat-label {
+    font-size: 12px;
+    opacity: .85;
+    margin-top: 5px;
+}
+
+.progress-track {
+    height: 10px;
+    background: rgba(255,255,255,.2);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0;
+    background: #ffe36e;
+    border-radius: 20px;
+    transition: width .5s;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 12px;
+    opacity: .8;
+}
+
+@media (min-width: 650px) {
+    .learning-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .learning-card:last-child {
+        grid-column: 1 / -1;
+    }
+}
 </style>
 </head>
 
 <body>
 
-<header>
+<div class="container">
 
-    <div class="top">
+    <header class="header">
+        <div class="logo">🌍 LINGORA</div>
+        <div class="tagline">Learn. Speak. Explore.</div>
+    </header>
 
-        <div class="logo">LINGORA 🌍</div>
+    <section class="welcome">
+        <h2 id="welcomeTitle">Welcome!</h2>
+        <p id="welcomeMessage">Your language learning journey starts here.</p>
+        <div class="target" id="targetLanguage"></div>
+    </section>
 
-        <div class="profile">👤</div>
+    <h2 class="section-title" id="sectionTitle">
+        Choose your learning activity
+    </h2>
 
-    </div>
+    <main class="learning-grid">
 
-    <h2 id="welcome"></h2>
-
-    <p id="headerDescription"></p>
-
-</header>
-
-
-<main class="container">
-
-    <div class="welcome-card">
-
-        <div class="welcome-icon">🌟</div>
-
-        <h3 id="cardTitle"></h3>
-
-        <p id="cardDescription"></p>
-
-        <a href="levels.html"
-           class="start-learning"
-           id="startButton">
+        <a href="alphabet.html" class="learning-card">
+            <div class="card-icon">🔤</div>
+            <div class="card-content">
+                <h3 id="alphabetTitle">Letter Pronunciation</h3>
+                <p id="alphabetDescription">
+                    Learn letters and practise their pronunciation.
+                </p>
+            </div>
         </a>
 
-    </div>
+        <a href="vocabulary.html" class="learning-card">
+            <div class="card-icon">📚</div>
+            <div class="card-content">
+                <h3 id="vocabularyTitle">Words and Expressions</h3>
+                <p id="vocabularyDescription">
+                    Discover useful words and everyday expressions.
+                </p>
+            </div>
+        </a>
 
-</main>
+        <a href="conversation.html" class="learning-card">
+            <div class="card-icon">🗣️</div>
+            <div class="card-content">
+                <h3 id="conversationTitle">Speaking and Conversation</h3>
+                <p id="conversationDescription">
+                    Learn to introduce yourself and speak with others.
+                </p>
+            </div>
+        </a>
 
+    </main>
 
-<footer>
+    <section class="progress-box">
 
-    LINGORA © 2026
+        <div class="progress-title" id="progressTitle">
+            Your Learning Progress
+        </div>
 
-    <br>
+        <div class="stats">
 
-    Learn. Speak. Explore.
+            <div>
+                <div class="stat-number" id="lessonsCount">0</div>
+                <div class="stat-label" id="lessonsLabel">Lessons</div>
+            </div>
 
-</footer>
+            <div>
+                <div class="stat-number" id="wordsCount">0</div>
+                <div class="stat-label" id="wordsLabel">Words</div>
+            </div>
 
+            <div>
+                <div class="stat-number" id="pointsCount">0</div>
+                <div class="stat-label" id="pointsLabel">Points</div>
+            </div>
+
+        </div>
+
+        <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        LINGORA © 2026 — Learn. Speak. Explore.
+    </footer>
+
+</div>
 
 <script>
 
-// =====================================
-// قراءة بيانات المتعلم
-// =====================================
-
-let learner = {};
-
-try {
-
-    learner = JSON.parse(
-        localStorage.getItem("lingoraLearner") || "{}"
-    );
-
-} catch(error) {
-
-    learner = {};
-
-}
-
-
-// =====================================
-// التحقق من البيانات
-// =====================================
-
-if (!learner.name || !learner.nativeLanguage) {
-
-    window.location.href = "language.html";
-
-} else {
-
-
-// =====================================
-// ترجمات لوحة التحكم
-// =====================================
-
 const translations = {
 
-    "العربية": {
-
-        lang: "ar",
-        dir: "rtl",
-        title: "LINGORA - الصفحة الرئيسية",
-
-        welcome: "مرحباً بك، {name}! 👋",
-
-        header:
-        "تعلم لغة جديدة، واكتشف عالماً من التواصل. ابدأ رحلتك وتعلم كيف تتحدث بثقة!",
-
-        cardTitle:
-        "رحلتك التعليمية تبدأ هنا",
-
-        cardDescription:
-        "اختر المستوى الذي يناسب معرفتك الحالية، وتعلم بالطريقة التي تناسبك. يمكنك تجاوز المراحل التي تعرفها مسبقاً والانتقال مباشرة إلى المحادثة.",
-
-        start:
-        "🚀 ابدأ التعلم"
-
+    en: {
+        welcome: "Welcome",
+        message: "Your language learning journey starts here.",
+        target: "You are learning",
+        section: "Choose your learning activity",
+        alphabet: "Letter Pronunciation",
+        alphabetDesc: "Learn letters and practise their pronunciation.",
+        vocabulary: "Words and Expressions",
+        vocabularyDesc: "Discover useful words and everyday expressions.",
+        conversation: "Speaking and Conversation",
+        conversationDesc: "Learn to introduce yourself and speak with others.",
+        progress: "Your Learning Progress",
+        lessons: "Lessons",
+        words: "Words",
+        points: "Points"
     },
 
-
-    "الفرنسية": {
-
-        lang: "fr",
-        dir: "ltr",
-        title: "LINGORA - Accueil",
-
-        welcome: "Bienvenue, {name} ! 👋",
-
-        header:
-        "Apprenez une nouvelle langue et découvrez un monde de communication. Commencez votre parcours et apprenez à parler avec confiance !",
-
-        cardTitle:
-        "Votre parcours d'apprentissage commence ici",
-
-        cardDescription:
-        "Choisissez le niveau qui correspond à vos connaissances. Apprenez à votre rythme. Vous pouvez passer les étapes que vous maîtrisez déjà et accéder directement à la conversation.",
-
-        start:
-        "🚀 Commencer à apprendre"
-
+    ar: {
+        welcome: "مرحباً",
+        message: "رحلتك لتعلم لغة جديدة تبدأ من هنا.",
+        target: "اللغة التي تتعلمها",
+        section: "اختر مجال التعلم",
+        alphabet: "تعلم نطق الحروف",
+        alphabetDesc: "تعرف على الحروف وتدرب على نطقها الصحيح.",
+        vocabulary: "الكلمات والتعابير",
+        vocabularyDesc: "تعلم الكلمات المهمة والتعابير المستعملة يومياً.",
+        conversation: "التحدث والمحادثة",
+        conversationDesc: "تعلم تقديم نفسك والتحدث مع الآخرين.",
+        progress: "تقدمك في التعلم",
+        lessons: "الدروس",
+        words: "الكلمات",
+        points: "النقاط"
     },
 
-
-    "الإنجليزية": {
-
-        lang: "en",
-        dir: "ltr",
-        title: "LINGORA - Home",
-
-        welcome: "Welcome, {name}! 👋",
-
-        header:
-        "Learn a new language and discover a world of communication. Start your journey and learn to speak with confidence!",
-
-        cardTitle:
-        "Your learning journey starts here",
-
-        cardDescription:
-        "Choose the level that matches your current knowledge and learn at your own pace. You can skip the stages you already know and go directly to conversation.",
-
-        start:
-        "🚀 Start Learning"
-
+    fr: {
+        welcome: "Bienvenue",
+        message: "Votre parcours d'apprentissage commence ici.",
+        target: "Vous apprenez",
+        section: "Choisissez votre activité",
+        alphabet: "Prononciation des lettres",
+        alphabetDesc: "Apprenez les lettres et leur prononciation.",
+        vocabulary: "Mots et expressions",
+        vocabularyDesc: "Découvrez des mots utiles et des expressions courantes.",
+        conversation: "Expression orale et conversation",
+        conversationDesc: "Apprenez à vous présenter et à parler avec les autres.",
+        progress: "Votre progression",
+        lessons: "Leçons",
+        words: "Mots",
+        points: "Points"
     },
 
+    es: {
+        welcome: "¡Bienvenido!",
+        message: "Tu aprendizaje de idiomas comienza aquí.",
+        target: "Estás aprendiendo",
+        section: "Elige tu actividad",
+        alphabet: "Pronunciación de letras",
+        alphabetDesc: "Aprende las letras y practica su pronunciación.",
+        vocabulary: "Palabras y expresiones",
+        vocabularyDesc: "Descubre palabras útiles y expresiones cotidianas.",
+        conversation: "Hablar y conversar",
+        conversationDesc: "Aprende a presentarte y hablar con otras personas.",
+        progress: "Tu progreso",
+        lessons: "Lecciones",
+        words: "Palabras",
+        points: "Puntos"
+    },
 
-    "الإسبانية": {
+    it: {
+        welcome: "Benvenuto!",
+        message: "Il tuo percorso di apprendimento inizia qui.",
+        target: "Stai imparando",
+        section: "Scegli la tua attività",
+        alphabet: "Pronuncia delle lettere",
+        alphabetDesc: "Impara le lettere e allenati a pronunciarle.",
+        vocabulary: "Parole ed espressioni",
+        vocabularyDesc: "Scopri parole utili ed espressioni quotidiane.",
+        conversation: "Parlare e conversare",
+        conversationDesc: "Impara a presentarti e a parlare con gli altri.",
+        progress: "I tuoi progressi",
+        lessons: "Lezioni",
+        words: "Parole",
+        points: "Punti"
+    },
 
-        lang: "es",
-        dir: "ltr",
-        title: "LINGORA - Inicio",
+    de: {
+        welcome: "Willkommen!",
+        message: "Deine Sprachlernreise beginnt hier.",
+        target: "Du lernst",
+        section: "Wähle deine Lernaktivität",
+        alphabet: "Buchstabenaussprache",
+        alphabetDesc: "Lerne Buchstaben und übe ihre Aussprache.",
+        vocabulary: "Wörter und Ausdrücke",
+        vocabularyDesc: "Entdecke nützliche Wörter und alltägliche Ausdrücke.",
+        conversation: "Sprechen und Konversation",
+        conversationDesc: "Lerne, dich vorzustellen und mit anderen zu sprechen.",
+        progress: "Dein Lernfortschritt",
+        lessons: "Lektionen",
+        words: "Wörter",
+        points: "Punkte"
+    },
 
-        welcome: "¡Bienvenido, {name}! 👋",
-
-        header:
-        "Aprende un nuevo idioma y descubre un mundo de comunicación. ¡Comienza tu viaje y aprende a hablar con confianza!",
-
-        cardTitle:
-        "Tu viaje de aprendizaje comienza aquí",
-
-        cardDescription:
-        "Elige el nivel que corresponde a tus conocimientos. Aprende a tu propio ritmo. Puedes saltarte las etapas que ya conoces e ir directamente a la conversación.",
-
-        start:
-        "🚀 Empezar a aprender"
-
+    ru: {
+        welcome: "Добро пожаловать!",
+        message: "Твоё изучение языка начинается здесь.",
+        target: "Ты изучаешь",
+        section: "Выбери занятие",
+        alphabet: "Произношение букв",
+        alphabetDesc: "Изучай буквы и тренируй их произношение.",
+        vocabulary: "Слова и выражения",
+        vocabularyDesc: "Изучай полезные слова и повседневные выражения.",
+        conversation: "Разговорная речь",
+        conversationDesc: "Научись представляться и общаться с другими.",
+        progress: "Твой прогресс",
+        lessons: "Уроки",
+        words: "Слова",
+        points: "Баллы"
     }
 
 };
 
+const languageNames = {
+    en: "English",
+    ar: "العربية",
+    fr: "Français",
+    es: "Español",
+    it: "Italiano",
+    de: "Deutsch",
+    ru: "Русский"
+};
 
-// =====================================
-// تحديد لغة الواجهة
-// =====================================
+function getLanguageCode(value) {
+    const supported = ["en", "ar", "fr", "es", "it", "de", "ru"];
 
-const nativeLanguage = learner.nativeLanguage;
+    if (supported.includes(value)) {
+        return value;
+    }
 
-const t = translations[nativeLanguage] || translations["العربية"];
+    const oldNames = {
+        "الإنجليزية": "en",
+        "العربية": "ar",
+        "الفرنسية": "fr",
+        "الإسبانية": "es",
+        "الإيطالية": "it",
+        "الألمانية": "de",
+        "الروسية": "ru"
+    };
 
-
-// =====================================
-// تطبيق اللغة على الصفحة
-// =====================================
-
-document.documentElement.lang = t.lang;
-
-document.documentElement.dir = t.dir;
-
-document.title = t.title;
-
-
-// =====================================
-// عرض المعلومات
-// =====================================
-
-document.getElementById("welcome").textContent =
-    t.welcome.replace("{name}", learner.name);
-
-document.getElementById("headerDescription").textContent =
-    t.header;
-
-document.getElementById("cardTitle").textContent =
-    t.cardTitle;
-
-document.getElementById("cardDescription").textContent =
-    t.cardDescription;
-
-document.getElementById("startButton").textContent =
-    t.start;
-
+    return oldNames[value] || "en";
 }
+
+const learner = JSON.parse(
+    localStorage.getItem("lingoraLearner") || "{}"
+);
+
+const nativeLanguage = getLanguageCode(
+    learner.nativeLanguage || localStorage.getItem("lingoraNativeLanguage") || "en"
+);
+
+const targetLanguage = getLanguageCode(
+    learner.targetLanguage || localStorage.getItem("lingoraTargetLanguage") || "fr"
+);
+
+const t = translations[nativeLanguage] || translations.en;
+
+document.documentElement.lang = nativeLanguage;
+document.documentElement.dir = nativeLanguage === "ar" ? "rtl" : "ltr";
+
+function setText(id, value) {
+    document.getElementById(id).textContent = value;
+}
+
+setText(
+    "welcomeTitle",
+    t.welcome + (learner.name ? " " + learner.name : "")
+);
+
+setText("welcomeMessage", t.message);
+
+setText(
+    "targetLanguage",
+    t.target + ": " + (languageNames[targetLanguage] || "French")
+);
+
+setText("sectionTitle", t.section);
+
+setText("alphabetTitle", t.alphabet);
+setText("alphabetDescription", t.alphabetDesc);
+
+setText("vocabularyTitle", t.vocabulary);
+setText("vocabularyDescription", t.vocabularyDesc);
+
+setText("conversationTitle", t.conversation);
+setText("conversationDescription", t.conversationDesc);
+
+setText("progressTitle", t.progress);
+setText("lessonsLabel", t.lessons);
+setText("wordsLabel", t.words);
+setText("pointsLabel", t.points);
+
+// قراءة إحصائيات المتعلم
+const lessons = Number(localStorage.getItem("lingoraLessons") || 0);
+const words = Number(localStorage.getItem("lingoraWords") || 0);
+const points = Number(localStorage.getItem("lingoraPoints") || 0);
+
+setText("lessonsCount", lessons);
+setText("wordsCount", words);
+setText("pointsCount", points);
+
+const percentage = Math.min((lessons / 20) * 100, 100);
+
+document.getElementById("progressFill").style.width =
+    percentage + "%";
 
 </script>
 
