@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LINGORA - اختيار المستوى</title>
+<title>LINGORA - Levels</title>
 
 <style>
 * {
@@ -194,113 +194,82 @@ footer {
 
     <div class="logo">LINGORA 🌍</div>
 
-    <h2 id="welcome">مرحباً بك في رحلتك التعليمية!</h2>
+    <h2 data-i18n="welcome"></h2>
 
-    <p>
-        اختر المستوى المناسب لك وابدأ التعلم
-        بالسرعة التي تناسبك.
-    </p>
+    <p data-i18n="intro"></p>
 
 </header>
 
-
 <main class="container">
 
-    <h2 class="title">🎯 اختر من أين تريد أن تبدأ</h2>
-
-
-    <!-- LEVEL 1 -->
+    <h2 class="title">🎯 <span data-i18n="choose_start"></span></h2>
 
     <div class="level-card">
 
         <div class="level-icon">🔤</div>
 
         <div class="level-info">
-            <h3>المستوى الأول: الحروف والنطق</h3>
-            <p>
-                تعلم حروف اللغة الجديدة،
-                واستمع إلى النطق الصحيح لكل حرف.
-            </p>
+            <h3 data-i18n="alphabet_title"></h3>
+            <p data-i18n="alphabet_desc"></p>
         </div>
 
         <button class="level-button"
-                onclick="chooseLevel('alphabet','alphabet.html')">
-            ابدأ
+                onclick="chooseLevel('alphabet','alphabet.html')"
+                data-i18n="start">
         </button>
 
     </div>
-
-
-    <!-- LEVEL 2 -->
 
     <div class="level-card">
 
         <div class="level-icon">📚</div>
 
         <div class="level-info">
-            <h3>المستوى الثاني: الكلمات والتعبيرات</h3>
-            <p>
-                تعلم الكلمات المهمة والتحيات
-                والعبارات التي تحتاجها يومياً.
-            </p>
+            <h3 data-i18n="vocabulary_title"></h3>
+            <p data-i18n="vocabulary_desc"></p>
         </div>
 
         <button class="level-button"
-                onclick="chooseLevel('vocabulary','vocabulary.html')">
-            ابدأ
+                onclick="chooseLevel('vocabulary','vocabulary.html')"
+                data-i18n="start">
         </button>
 
     </div>
-
-
-    <!-- LEVEL 3 -->
 
     <div class="level-card">
 
         <div class="level-icon">🗣️</div>
 
         <div class="level-info">
-            <h3>المستوى الثالث: التحدث والمحادثة</h3>
-            <p>
-                تعلم تقديم نفسك والتحدث
-                والتواصل مع الآخرين.
-            </p>
+            <h3 data-i18n="conversation_title"></h3>
+            <p data-i18n="conversation_desc"></p>
         </div>
 
         <button class="level-button"
-                onclick="chooseLevel('conversation','conversation.html')">
-            ابدأ
+                onclick="chooseLevel('conversation','conversation.html')"
+                data-i18n="start">
         </button>
 
     </div>
-
-
-    <!-- SKIP OPTION -->
 
     <div class="direct-card">
 
-        <h3>⭐ هل تعرف الحروف بالفعل؟</h3>
+        <h3 data-i18n="skip_title"></h3>
 
-        <p>
-            لا داعي لإعادة تعلم ما تعرفه!
-            يمكنك تجاوز مرحلة الحروف والانتقال
-            مباشرة إلى تعلم المحادثة.
-        </p>
+        <p data-i18n="skip_desc"></p>
 
         <button class="direct-button"
-                onclick="chooseLevel('conversation','conversation.html')">
-            أعرف الحروف، انتقل إلى المحادثة
+                onclick="chooseLevel('conversation','conversation.html')"
+                data-i18n="skip_button">
         </button>
 
     </div>
 
-
-    <a href="dashboard.html" class="back-button">
-        ↩ العودة إلى لوحة التحكم
+    <a href="dashboard.html" class="back-button"
+       data-i18n="back_dashboard">
     </a>
 
 </main>
-
 
 <footer>
     LINGORA © 2026
@@ -308,10 +277,7 @@ footer {
     Learn. Speak. Explore.
 </footer>
 
-
 <script>
-
-// بيانات المتعلم
 
 let learner = {};
 
@@ -323,37 +289,133 @@ try {
     learner = {};
 }
 
+// تحديد اللغة الأم
+const language =
+    learner.nativeLanguage ||
+    learner.native ||
+    learner.motherTongue ||
+    "ar";
 
-// الترحيب
+// قاموس خاص بهذه الصفحة
+const pageTranslations = {
 
-if (learner.name) {
-    document.getElementById("welcome").textContent =
-        "مرحباً بك، " + learner.name + " 👋";
+ar: {
+welcome: "مرحباً بك في رحلتك التعليمية!",
+intro: "اختر المستوى المناسب لك وابدأ التعلم بالسرعة التي تناسبك.",
+choose_start: "اختر من أين تريد أن تبدأ",
+alphabet_title: "المستوى الأول: الحروف والنطق",
+alphabet_desc: "تعلم حروف اللغة الجديدة، واستمع إلى النطق الصحيح لكل حرف.",
+vocabulary_title: "المستوى الثاني: الكلمات والتعبيرات",
+vocabulary_desc: "تعلم الكلمات المهمة والتحيات والعبارات التي تحتاجها يومياً.",
+conversation_title: "المستوى الثالث: التحدث والمحادثة",
+conversation_desc: "تعلم تقديم نفسك والتحدث والتواصل مع الآخرين.",
+start: "ابدأ",
+skip_title: "⭐ هل تعرف الحروف بالفعل؟",
+skip_desc: "لا داعي لإعادة تعلم ما تعرفه! يمكنك تجاوز مرحلة الحروف والانتقال مباشرة إلى تعلم المحادثة.",
+skip_button: "أعرف الحروف، انتقل إلى المحادثة",
+back_dashboard: "↩ العودة إلى لوحة التحكم"
+},
+
+fr: {
+welcome: "Bienvenue dans votre parcours d'apprentissage !",
+intro: "Choisissez le niveau qui vous convient et apprenez à votre rythme.",
+choose_start: "Choisissez par où commencer",
+alphabet_title: "Niveau 1 : Lettres et prononciation",
+alphabet_desc: "Apprenez les lettres de la nouvelle langue et écoutez leur prononciation correcte.",
+vocabulary_title: "Niveau 2 : Mots et expressions",
+vocabulary_desc: "Apprenez les mots importants, les salutations et les expressions du quotidien.",
+conversation_title: "Niveau 3 : Expression et conversation",
+conversation_desc: "Apprenez à vous présenter, parler et communiquer avec les autres.",
+start: "Commencer",
+skip_title: "⭐ Vous connaissez déjà les lettres ?",
+skip_desc: "Inutile de réapprendre ce que vous connaissez ! Passez directement à l'apprentissage de la conversation.",
+skip_button: "Je connais les lettres, passer à la conversation",
+back_dashboard: "↩ Retour au tableau de bord"
+},
+
+en: {
+welcome: "Welcome to your learning journey!",
+intro: "Choose the level that suits you and learn at your own pace.",
+choose_start: "Choose where you want to start",
+alphabet_title: "Level 1: Letters and Pronunciation",
+alphabet_desc: "Learn the letters of the new language and listen to their correct pronunciation.",
+vocabulary_title: "Level 2: Words and Expressions",
+vocabulary_desc: "Learn important words, greetings and everyday expressions.",
+conversation_title: "Level 3: Speaking and Conversation",
+conversation_desc: "Learn how to introduce yourself, speak and communicate with others.",
+start: "Start",
+skip_title: "⭐ Do you already know the letters?",
+skip_desc: "No need to learn what you already know! Skip the letters and go directly to conversation.",
+skip_button: "I know the letters, go to conversation",
+back_dashboard: "↩ Back to Dashboard"
+},
+
+es: {
+welcome: "¡Bienvenido a tu viaje de aprendizaje!",
+intro: "Elige el nivel adecuado para ti y aprende a tu propio ritmo.",
+choose_start: "Elige por dónde quieres empezar",
+alphabet_title: "Nivel 1: Letras y pronunciación",
+alphabet_desc: "Aprende las letras del nuevo idioma y escucha su pronunciación correcta.",
+vocabulary_title: "Nivel 2: Palabras y expresiones",
+vocabulary_desc: "Aprende palabras importantes, saludos y expresiones cotidianas.",
+conversation_title: "Nivel 3: Hablar y conversar",
+conversation_desc: "Aprende a presentarte, hablar y comunicarte con los demás.",
+start: "Comenzar",
+skip_title: "⭐ ¿Ya conoces las letras?",
+skip_desc: "¡No necesitas volver a aprender lo que ya sabes! Pasa directamente a las conversaciones.",
+skip_button: "Conozco las letras, ir a conversación",
+back_dashboard: "↩ Volver al panel"
 }
 
+};
+
+// تطبيق الترجمة
+const dictionary =
+    pageTranslations[language] || pageTranslations.ar;
+
+document.documentElement.lang =
+    ["ar","fr","en","es"].includes(language) ? language : "ar";
+
+document.documentElement.dir =
+    language === "ar" ? "rtl" : "ltr";
+
+document.querySelectorAll("[data-i18n]").forEach(element => {
+
+    const key = element.getAttribute("data-i18n");
+
+    if (dictionary[key]) {
+        element.textContent = dictionary[key];
+    }
+
+});
+
+// تخصيص الترحيب باسم المتعلم
+if (learner.name) {
+
+    const greeting = {
+        ar: "مرحباً بك، " + learner.name + " 👋",
+        fr: "Bienvenue, " + learner.name + " 👋",
+        en: "Welcome, " + learner.name + " 👋",
+        es: "¡Bienvenido/a, " + learner.name + " 👋"
+    };
+
+    document.querySelector('[data-i18n="welcome"]').textContent =
+        greeting[language] || greeting.ar;
+}
 
 // اختيار المستوى
-
 function chooseLevel(level, page) {
 
-    // حفظ اختيار المتعلم
+    localStorage.setItem("lingoraStartLevel", level);
 
-    localStorage.setItem(
-        "lingoraStartLevel",
-        level
-    );
-
-    localStorage.setItem(
-        "lingoraLearningPath",
-        level
-    );
-
-    // الانتقال إلى الصفحة المختارة
+    localStorage.setItem("lingoraLearningPath", level);
 
     window.location.href = page;
 }
 
 </script>
+
+<script src="lingora-i18n.js"></script>
 
 </body>
 </html>
